@@ -11,7 +11,7 @@ import csv
 def spotify_auth():
     scope = "user-library-read"
 
-    auth_manager = SpotifyClientCredentials(client_id='d257b254f2fb4b31b1b67ef23f7333b3', client_secret='5e7c2d68c4964c2b925a789cdd6b4b36')
+    auth_manager = SpotifyClientCredentials(client_id='ENTER_CLIENT_ID', client_secret='ENTER_CLIENT_SECRET')
     sp = spot.Spotify(auth_manager=auth_manager)
     return sp
 
@@ -72,12 +72,6 @@ def write_csv():
 
         writer.writerow(header)
         writer.writerows(row)
-
-
-
-
-
-
 
 if __name__ == "__main__":
     path = sys.argv[1]
