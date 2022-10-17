@@ -5,6 +5,8 @@ import sys
 import json
 import time
 import os
+import csv
+
 
 def spotify_auth():
     scope = "user-library-read"
@@ -58,9 +60,28 @@ def print_playlist(playlist):
         )
     print()
 
+def write_csv():
+    header = ['names', 'coolness']
+    row = [
+        ["harshit", "very cool"], 
+        ["anne", "eh"]
+        ]
+    with open("../feature_data/practice_file.csv",'w', newline='') as fd:
+
+        writer = csv.writer(fd)
+
+        writer.writerow(header)
+        writer.writerows(row)
+
+
+
+
+
+
 
 if __name__ == "__main__":
     path = sys.argv[1]
     auth = spotify_auth()
     # print_playlists(auth)
-    process_playlists(path)
+    write_csv()
+    #process_playlists(path)
