@@ -1,5 +1,6 @@
 import spotipy as spot
 from spotipy.oauth2 import SpotifyClientCredentials
+from spotipy.oauth2 import SpotifyOAuth
 
 import sys
 import json
@@ -11,7 +12,9 @@ import csv
 def spotify_auth():
     scope = "user-library-read"
 
-    auth_manager = SpotifyClientCredentials(client_id='ENTER_CLIENT_ID', client_secret='ENTER_CLIENT_SECRET')
+    scope = "playlist-modify-public"
+    
+    auth_manager = SpotifyClientCredentials(client_id='ae6b2a7b569a474d9a7e022c3abe85de', client_secret='4267dee3981c41c08433f516b770a589')
     sp = spot.Spotify(auth_manager=auth_manager)
     return sp
 
@@ -25,6 +28,9 @@ def print_playlists(sp):
             playlists = sp.next(playlists)
         else:
             playlists = None
+    # info = sp.user_playlist_create(sp.me().user_id, "I didn't make this", public=True, collaborative=False, description='')
+    # print(info)
+
 
 def process_playlists(path):
     filenames = os.listdir(path)
@@ -76,6 +82,6 @@ def write_csv():
 if __name__ == "__main__":
     path = sys.argv[1]
     auth = spotify_auth()
-    # print_playlists(auth)
+    print_playlists(auth)
     write_csv()
     #process_playlists(path)
