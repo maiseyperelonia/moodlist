@@ -80,7 +80,7 @@ def write_csv():
         writer.writerows(row)
 
 if __name__ == "__main__":
-    path = sys.argv[1]
+    #path = sys.argv[1]
     auth = spotify_auth()
     print_playlists(auth)
     write_csv()
