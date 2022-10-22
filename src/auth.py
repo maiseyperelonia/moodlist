@@ -7,17 +7,38 @@ import json
 import time
 import os
 import csv
+import json
+import requests
 
+def get_spotify_token():
+    AUTH_URL = 'https://accounts.spotify.com/api/token'
+    auth_response = requests.post(AUTH_URL, {
+        'grant_type': 'client_credentials',
+        'client_id': 'a205530de70741b89d875ffb7540b000',
+        'client_secret': 'a9396ffb47254bf6863c31a221b14c95',
+    })
+
+    # convert the response to JSON
+    auth_response_data = auth_response.json()
+
+    # save the access token
+    access_token = auth_response_data['access_token']
+    print("token:", access_token)
+    return access_token
+
+headers = {
+    'Authorization': 'Bearer {token}'.format(token=get_spotify_token())
+}
 
 def spotify_auth():
     scope = "user-library-read"
 
     scope = "playlist-modify-public"
     
-    auth_manager = SpotifyClientCredentials(client_id='ae6b2a7b569a474d9a7e022c3abe85de', client_secret='4267dee3981c41c08433f516b770a589')
+    auth_manager = SpotifyClientCredentials(client_id='a205530de70741b89d875ffb7540b000', client_secret='a9396ffb47254bf6863c31a221b14c95')
     sp = spot.Spotify(auth_manager=auth_manager)
     return sp
-
+    
 
 def print_playlists(sp):
     playlists = sp.user_playlists('spotify')
@@ -32,7 +53,7 @@ def print_playlists(sp):
     # print(info)
 
 
-def process_playlists(path):
+def get_playlists(path, keywords):
     filenames = os.listdir(path)
     for filename in sorted(filenames):
         if filename.startswith("mpd.slice.") and filename.endswith(".json"):
@@ -42,8 +63,19 @@ def process_playlists(path):
             f.close()
             mpd_slice = json.loads(js)
             for playlist in mpd_slice["playlists"]:
-                print_playlist(playlist)
+                for keyword in keywords:
+                    pName = playlist["name"]
+                    if (pName.find(keyword) != -1):
+                        print(pName)
 
+def get_song_info(track_id):
+
+    # base URL of all Spotify API endpoints
+    BASE_URL = 'https://api.spotify.com/v1/'
+
+    # actual GET request with proper header
+    r = requests.get(BASE_URL + 'audio-features/' + track_id, headers=headers)
+    print(r.json())
 
 def print_playlist(playlist):
     print("=====", playlist["pid"], "====")
@@ -82,6 +114,11 @@ def write_csv():
 if __name__ == "__main__":
     #path = sys.argv[1]
     auth = spotify_auth()
-    print_playlists(auth)
+    keyword = sys.argv[2].split(',')
+    track_id = sys.argv[3]
+    get_song_info(track_id)
+    #get_playlists(path, keyword)
+    #print_playlists(auth)
     write_csv()
+
     #process_playlists(path)
