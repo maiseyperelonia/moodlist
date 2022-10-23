@@ -10,6 +10,7 @@ import csv
 import json
 import requests
 
+
 def get_spotify_token():
     AUTH_URL = 'https://accounts.spotify.com/api/token'
     auth_response = requests.post(AUTH_URL, {
@@ -53,8 +54,9 @@ def print_playlists(sp):
     # print(info)
 
 
-def get_playlists(path, keywords):
+def get_playlists(path):
     filenames = os.listdir(path)
+    file_num = 0
     for filename in sorted(filenames):
         if filename.startswith("mpd.slice.") and filename.endswith(".json"):
             fullpath = os.sep.join((path, filename))
@@ -62,20 +64,59 @@ def get_playlists(path, keywords):
             js = f.read()
             f.close()
             mpd_slice = json.loads(js)
+
+            label_f = open("d:\VScode\moodlist-1\data_scrape.json")
+            label_js = label_f.read()
+            label_f.close()
+            label_info = json.loads(label_js)
+
             for playlist in mpd_slice["playlists"]:
-                for keyword in keywords:
+                label = "Sad"
+                keyword_arr = (label_info["Sad"])["keywords"]
+                for keyword in keyword_arr:
                     pName = playlist["name"]
+                    
                     if (pName.find(keyword) != -1):
+                        insert_songs(label, playlist, file_num)
                         print(pName)
+                file_num += 1
+
+def insert_songs(label, playlist, file_num):
+    song_cnt = 0
+    for track in playlist["tracks"]:
+        track_id = track["track_uri"][14:]
+        track_info = get_song_info(track_id).json()
+
+        if(song_cnt == 0):
+            create_csv(label, track_info,file_num)
+        if(song_cnt == 9):
+            song_cnt = 0
+        else:  
+            song_cnt += 1
+
+        write_csv(label, track_info, file_num)
+
+def create_csv(label, track, file_num):
+    
+    file_name = "../feature_data/" + label + "_" + str(file_num) + ".csv"
+    with open(file_name,'w', newline='') as fd:
+
+        writer = csv.writer(fd)
+        writer.writerow(track.keys())
+
+def write_csv(label, track, file_num):
+    file_name = "../feature_data/" + label + "_" + str(file_num) + ".csv"
+    with open(file_name,'a', newline='') as fd:
+        writer = csv.writer(fd)
+        writer.writerow(track.values())
 
 def get_song_info(track_id):
-
     # base URL of all Spotify API endpoints
     BASE_URL = 'https://api.spotify.com/v1/'
 
     # actual GET request with proper header
-    r = requests.get(BASE_URL + 'audio-features/' + track_id, headers=headers)
-    print(r.json())
+    response = requests.get(BASE_URL + 'audio-features/' + track_id, headers=headers)
+    return response
 
 def print_playlist(playlist):
     print("=====", playlist["pid"], "====")
@@ -98,27 +139,11 @@ def print_playlist(playlist):
         )
     print()
 
-def write_csv():
-    header = ['names', 'coolness']
-    row = [
-        ["harshit", "very cool"], 
-        ["anne", "eh"]
-        ]
-    with open("../feature_data/practice_file.csv",'w', newline='') as fd:
-
-        writer = csv.writer(fd)
-
-        writer.writerow(header)
-        writer.writerows(row)
-
 if __name__ == "__main__":
-    #path = sys.argv[1]
+    path = "d:\VScode\moodlist-1\SpotifyDataset\data"
     auth = spotify_auth()
-    keyword = sys.argv[2].split(',')
-    track_id = sys.argv[3]
-    get_song_info(track_id)
-    #get_playlists(path, keyword)
+    get_playlists(path)
     #print_playlists(auth)
-    write_csv()
+    #write_csv()
 
     #process_playlists(path)

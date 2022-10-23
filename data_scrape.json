@@ -1,0 +1,29 @@
+{
+    "Sad":
+    {
+        "keywords": [
+            "sad",
+            ":(",
+            "unhappy",
+            "heartbreak",
+            "tears",
+            "pain",
+            "sucks"
+        ]
+    },       
+    "Happy": {
+        "keywords": [
+            "happy",
+            "upbeat",
+            "best",
+            ":)",
+            "XD",
+            "jumping",
+            "joyful",
+            "sun",
+            "bright",
+            "smile"
+        ]
+    }     
+}
+       
