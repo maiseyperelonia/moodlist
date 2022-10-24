@@ -71,15 +71,15 @@ def get_playlists(path):
             label_info = json.loads(label_js)
 
             for playlist in mpd_slice["playlists"]:
-                label = "Sad"
-                keyword_arr = (label_info["Sad"])["keywords"]
-                for keyword in keyword_arr:
-                    pName = playlist["name"]
-                    
-                    if (pName.find(keyword) != -1):
-                        insert_songs(label, playlist, file_num)
-                        print(pName)
-                file_num += 1
+                for label in label_info["Labels"]:
+                    keyword_arr = label_info["Labels"][label]
+                    for keyword in keyword_arr["keywords"]:
+                        pName = playlist["name"]
+                        
+                        if (pName.find(keyword) != -1):
+                            insert_songs(label, playlist, file_num)
+                            print(pName)
+                    file_num += 1
 
 def insert_songs(label, playlist, file_num):
     song_cnt = 0
@@ -88,9 +88,11 @@ def insert_songs(label, playlist, file_num):
         track_info = get_song_info(track_id).json()
 
         if(song_cnt == 0):
-            create_csv(label, track_info,file_num)
+            create_csv(label, track_info, file_num)
+
         if(song_cnt == 9):
             song_cnt = 0
+            file_num += 1
         else:  
             song_cnt += 1
 

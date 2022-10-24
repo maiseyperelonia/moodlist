@@ -1,29 +1,60 @@
 {
-    "Sad":
-    {
-        "keywords": [
-            "sad",
-            ":(",
-            "unhappy",
-            "heartbreak",
-            "tears",
-            "pain",
-            "sucks"
-        ]
-    },       
-    "Happy": {
-        "keywords": [
-            "happy",
-            "upbeat",
-            "best",
-            ":)",
-            "XD",
-            "jumping",
-            "joyful",
-            "sun",
-            "bright",
-            "smile"
-        ]
-    }     
+    "Labels": {
+            "Sad": {
+                "keywords": [
+                    "sad",
+                    ":(",
+                    "unhappy",
+                    "heartbreak",
+                    "tears",
+                    "pain ",
+                    "painful",
+                    "sucks",
+                    "sorry",
+                    "gloomy",
+                    "raining",
+                    " rain "
+                ]
+            },       
+            "Happy": {
+                "keywords": [
+                    "happy",
+                    "upbeat",
+                    "best",
+                    ":)",
+                    "XD",
+                    "jumping",
+                    "joyful",
+                    "sun ",
+                    "summer",
+                    "sunny",
+                    "sunshine",
+                    "carefree",
+                    "bright",
+                    "smile",
+                    "glad",
+                    "<3"
+                ]
+            },
+            "Angry" : {
+                "keywords": [
+                    "angry",
+                    "screaming",
+                    "venting",
+                    "vent ",
+                    "scream",
+                    "pissed",
+                    "yell ",
+                    "yelling",
+                    "dare",
+                    "punch",
+                    "fighting",
+                    "fight",
+                    "rage",
+                    "emo ",
+                    "thunder"
+                ]
+            }
+    } 
 }
        
