@@ -65,7 +65,7 @@ def get_playlists(path):
             f.close()
             mpd_slice = json.loads(js)
 
-            label_f = open("d:\VScode\moodlist-1\data_scrape.json")
+            label_f = open("../data_scrape.json")
             label_js = label_f.read()
             label_f.close()
             label_info = json.loads(label_js)
@@ -77,12 +77,17 @@ def get_playlists(path):
                         pName = playlist["name"]
                         
                         if (pName.find(keyword) != -1):
-                            insert_songs(label, playlist, file_num)
-                            print(pName)
+                            if (label == "Angry"):
+                                print("") # placeholder
+                                #insert_songs(label, playlist, file_num)
+                            # if (label == "Angry"):
+                            #     print(pName," -- ", label)
+                            #     print_playlist(playlist)
                     file_num += 1
 
 def insert_songs(label, playlist, file_num):
     song_cnt = 0
+    total_song_cnt = 0
     for track in playlist["tracks"]:
         track_id = track["track_uri"][14:]
         track_info = get_song_info(track_id).json()
@@ -90,11 +95,12 @@ def insert_songs(label, playlist, file_num):
         if(song_cnt == 0):
             create_csv(label, track_info, file_num)
 
-        if(song_cnt == 9):
+        if(song_cnt == 9 and (playlist["num_tracks"] - total_song_cnt) > 7):
             song_cnt = 0
             file_num += 1
         else:  
             song_cnt += 1
+            total_song_cnt += 1
 
         write_csv(label, track_info, file_num)
 
@@ -142,7 +148,7 @@ def print_playlist(playlist):
     print()
 
 if __name__ == "__main__":
-    path = "d:\VScode\moodlist-1\SpotifyDataset\data"
+    path = "../SpotifyDataset/data"
     auth = spotify_auth()
     get_playlists(path)
     #print_playlists(auth)

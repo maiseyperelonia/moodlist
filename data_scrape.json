@@ -12,8 +12,12 @@
                     "sucks",
                     "sorry",
                     "gloomy",
-                    "raining",
-                    " rain "
+                    " raining",
+                    " rain ",
+                    "lonely",
+                    "stay",
+                    "hurt",
+                    "breakup"
                 ]
             },       
             "Happy": {
@@ -32,8 +36,7 @@
                     "carefree",
                     "bright",
                     "smile",
-                    "glad",
-                    "<3"
+                    "glad"
                 ]
             },
             "Angry" : {
@@ -50,9 +53,47 @@
                     "punch",
                     "fighting",
                     "fight",
-                    "rage",
+                    " raging",
+                    " rage",
                     "emo ",
-                    "thunder"
+                    "thunder",
+                    " anger",
+                    "fuck",
+                    "shit",
+                    "asshole",
+                    "hell ",
+                    "kill",
+                    "murder",
+                    " hate",
+                    "furious",
+                    "cheesed", 
+                    "fuming",
+                    "mad ",
+                    "livid"
+                ]
+            },
+            "Love" : {
+                "keywords": [
+                    "love",
+                    "romantic",
+                    "<3",
+                    "lover",
+                    "romance",
+                    "rom-com",
+                    "sex",
+                    "horny"
+                ]
+            },
+            "Calm" : {
+                "keywords": [
+                    "chill",
+                    "relax",
+                    "vibe",
+                    "low-fi",
+                    "low fi",
+                    "cafe",
+                    "coffee",
+                    "destress"
                 ]
             }
     } 
