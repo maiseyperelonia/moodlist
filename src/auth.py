@@ -78,8 +78,7 @@ def get_playlists(path):
                         
                         if (pName.find(keyword) != -1):
                             if (label == "Angry"):
-                                print("") # placeholder
-                                #insert_songs(label, playlist, file_num)
+                                insert_songs(label, playlist, file_num)
                             # if (label == "Angry"):
                             #     print(pName," -- ", label)
                             #     print_playlist(playlist)
@@ -93,15 +92,21 @@ def insert_songs(label, playlist, file_num):
         track_info = get_song_info(track_id).json()
 
         if(song_cnt == 0):
+            print("creating csv for file: ", file_num)
             create_csv(label, track_info, file_num)
 
-        if(song_cnt == 9 and (playlist["num_tracks"] - total_song_cnt) > 7):
-            song_cnt = 0
-            file_num += 1
+        if(song_cnt == 9):
+            total_song_cnt += 1
+            if ((playlist["num_tracks"] - total_song_cnt) > 7):
+                song_cnt = 0
+                file_num += 1
+            """else:
+                print("remaining: ",(playlist["num_tracks"] - total_song_cnt),"for file num",file_num)"""
         else:  
             song_cnt += 1
             total_song_cnt += 1
 
+        #print("writing track num: ", total_song_cnt)
         write_csv(label, track_info, file_num)
 
 def create_csv(label, track, file_num):
