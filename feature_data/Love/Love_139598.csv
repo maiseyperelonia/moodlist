@@ -1,0 +1,10 @@
+error
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+0.509,0.538,7,-7.335,1,0.0572,0.385,0,0.104,0.244,75.089,audio_features,2jyjhRf6DVbMPU5zxagN2h,spotify:track:2jyjhRf6DVbMPU5zxagN2h,https://api.spotify.com/v1/tracks/2jyjhRf6DVbMPU5zxagN2h,https://api.spotify.com/v1/audio-analysis/2jyjhRf6DVbMPU5zxagN2h,252867,4
+0.572,0.499,2,-5.237,1,0.0311,0.0283,0,0.213,0.108,101.593,audio_features,1JCCdiru7fhstOIF4N7WJC,spotify:track:1JCCdiru7fhstOIF4N7WJC,https://api.spotify.com/v1/tracks/1JCCdiru7fhstOIF4N7WJC,https://api.spotify.com/v1/audio-analysis/1JCCdiru7fhstOIF4N7WJC,237248,4
+0.584,0.699,5,-5.138,1,0.0341,0.0152,0,0.25,0.347,134.04,audio_features,1koYnAB1p60WBpEIUgZTnU,spotify:track:1koYnAB1p60WBpEIUgZTnU,https://api.spotify.com/v1/tracks/1koYnAB1p60WBpEIUgZTnU,https://api.spotify.com/v1/audio-analysis/1koYnAB1p60WBpEIUgZTnU,203760,4
+0.389,0.665,0,-6.169,1,0.0644,0.178,0.000732,0.116,0.199,117.055,audio_features,7lGKEWMXVWWTt3X71Bv44I,spotify:track:7lGKEWMXVWWTt3X71Bv44I,https://api.spotify.com/v1/tracks/7lGKEWMXVWWTt3X71Bv44I,https://api.spotify.com/v1/audio-analysis/7lGKEWMXVWWTt3X71Bv44I,193547,4
+0.512,0.526,1,-5.44,1,0.0251,0.0724,0,0.0675,0.249,85.024,audio_features,05CrK6Q5VGtfPDtyQFJ4Kf,spotify:track:05CrK6Q5VGtfPDtyQFJ4Kf,https://api.spotify.com/v1/tracks/05CrK6Q5VGtfPDtyQFJ4Kf,https://api.spotify.com/v1/audio-analysis/05CrK6Q5VGtfPDtyQFJ4Kf,226330,4
+0.646,0.499,2,-7.617,1,0.0597,0.465,0,0.394,0.421,83.94,audio_features,0XHlLhgUHwktBr4veFM0yF,spotify:track:0XHlLhgUHwktBr4veFM0yF,https://api.spotify.com/v1/tracks/0XHlLhgUHwktBr4veFM0yF,https://api.spotify.com/v1/audio-analysis/0XHlLhgUHwktBr4veFM0yF,192108,4

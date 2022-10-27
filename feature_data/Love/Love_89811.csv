@@ -1,0 +1,10 @@
+danceability,energy,key,loudness,mode,speechiness,acousticness,instrumentalness,liveness,valence,tempo,type,id,uri,track_href,analysis_url,duration_ms,time_signature
+0.666,0.652,7,-4.957,0,0.113,0.0927,0.000376,0.0474,0.7,171.918,audio_features,1rfmeLSq9SHLInp1fEsgbg,spotify:track:1rfmeLSq9SHLInp1fEsgbg,https://api.spotify.com/v1/tracks/1rfmeLSq9SHLInp1fEsgbg,https://api.spotify.com/v1/audio-analysis/1rfmeLSq9SHLInp1fEsgbg,249767,4
+0.538,0.282,7,-9.148,0,0.0633,0.555,0.000207,0.374,0.201,74.31,audio_features,77EipMYqP1rGvotKd6i5E3,spotify:track:77EipMYqP1rGvotKd6i5E3,https://api.spotify.com/v1/tracks/77EipMYqP1rGvotKd6i5E3,https://api.spotify.com/v1/audio-analysis/77EipMYqP1rGvotKd6i5E3,174084,4
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+"{'status': 429, 'message': 'API rate limit exceeded'}"

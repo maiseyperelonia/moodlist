@@ -1,0 +1,10 @@
+danceability,energy,key,loudness,mode,speechiness,acousticness,instrumentalness,liveness,valence,tempo,type,id,uri,track_href,analysis_url,duration_ms,time_signature
+0.53,0.422,5,-6.262,1,0.0342,0.407,0,0.107,0.349,119.964,audio_features,2vwlzO0Qp8kfEtzTsCXfyE,spotify:track:2vwlzO0Qp8kfEtzTsCXfyE,https://api.spotify.com/v1/tracks/2vwlzO0Qp8kfEtzTsCXfyE,https://api.spotify.com/v1/audio-analysis/2vwlzO0Qp8kfEtzTsCXfyE,221360,4
+0.336,0.602,4,-6.354,1,0.0325,0.0635,0,0.141,0.299,161.01,audio_features,5x5JM1BSB6vollcIzDocqT,spotify:track:5x5JM1BSB6vollcIzDocqT,https://api.spotify.com/v1/tracks/5x5JM1BSB6vollcIzDocqT,https://api.spotify.com/v1/audio-analysis/5x5JM1BSB6vollcIzDocqT,234520,4
+0.459,0.545,6,-4.874,1,0.0282,0.142,0,0.105,0.194,137.941,audio_features,6ZfXA2xakAvphXOSOJ3u1W,spotify:track:6ZfXA2xakAvphXOSOJ3u1W,https://api.spotify.com/v1/tracks/6ZfXA2xakAvphXOSOJ3u1W,https://api.spotify.com/v1/audio-analysis/6ZfXA2xakAvphXOSOJ3u1W,248587,3
+0.76,0.575,6,-4.06,1,0.0444,0.282,0.000383,0.0993,0.314,131.983,audio_features,6n2GPvMJtFZ4ckoc9EWHMx,spotify:track:6n2GPvMJtFZ4ckoc9EWHMx,https://api.spotify.com/v1/tracks/6n2GPvMJtFZ4ckoc9EWHMx,https://api.spotify.com/v1/audio-analysis/6n2GPvMJtFZ4ckoc9EWHMx,225493,4
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+0.562,0.758,0,-4.012,1,0.0524,0.0318,0,0.39,0.321,137.152,audio_features,2YlQCqBj6FJsrQmc8K2CGa,spotify:track:2YlQCqBj6FJsrQmc8K2CGa,https://api.spotify.com/v1/tracks/2YlQCqBj6FJsrQmc8K2CGa,https://api.spotify.com/v1/audio-analysis/2YlQCqBj6FJsrQmc8K2CGa,202373,4
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+"{'status': 429, 'message': 'API rate limit exceeded'}"

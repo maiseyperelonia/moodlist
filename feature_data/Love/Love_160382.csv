@@ -1,0 +1,10 @@
+danceability,energy,key,loudness,mode,speechiness,acousticness,instrumentalness,liveness,valence,tempo,type,id,uri,track_href,analysis_url,duration_ms,time_signature
+0.493,0.531,6,-8.026,1,0.0342,0.0199,5.9e-05,0.121,0.127,150.111,audio_features,5M7WIlp1cAgAFqrXz89EoK,spotify:track:5M7WIlp1cAgAFqrXz89EoK,https://api.spotify.com/v1/tracks/5M7WIlp1cAgAFqrXz89EoK,https://api.spotify.com/v1/audio-analysis/5M7WIlp1cAgAFqrXz89EoK,281867,4
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+"{'status': 429, 'message': 'API rate limit exceeded'}"

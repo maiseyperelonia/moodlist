@@ -1,0 +1,10 @@
+danceability,energy,key,loudness,mode,speechiness,acousticness,instrumentalness,liveness,valence,tempo,type,id,uri,track_href,analysis_url,duration_ms,time_signature
+0.772,0.371,5,-5.743,0,0.0348,0.744,0,0.167,0.684,96.574,audio_features,6nLvaCZFR1wEzW3sIKpsnr,spotify:track:6nLvaCZFR1wEzW3sIKpsnr,https://api.spotify.com/v1/tracks/6nLvaCZFR1wEzW3sIKpsnr,https://api.spotify.com/v1/audio-analysis/6nLvaCZFR1wEzW3sIKpsnr,233733,4
+0.616,0.462,0,-9.135,1,0.0271,0.279,0.00473,0.153,0.23,101.983,audio_features,1UR0lWHLSCx2naiD7bq9FW,spotify:track:1UR0lWHLSCx2naiD7bq9FW,https://api.spotify.com/v1/tracks/1UR0lWHLSCx2naiD7bq9FW,https://api.spotify.com/v1/audio-analysis/1UR0lWHLSCx2naiD7bq9FW,284187,4
+0.268,0.391,1,-5.985,1,0.0308,0.882,0.00592,0.15,0.137,86.77,audio_features,6AWbUFUg1ufaaTT98IbjMV,spotify:track:6AWbUFUg1ufaaTT98IbjMV,https://api.spotify.com/v1/tracks/6AWbUFUg1ufaaTT98IbjMV,https://api.spotify.com/v1/audio-analysis/6AWbUFUg1ufaaTT98IbjMV,288773,4
+0.458,0.578,2,-7.219,1,0.0289,0.323,0.00302,0.0995,0.358,82.893,audio_features,3p9pWFYjQd9SpndP8wXnVz,spotify:track:3p9pWFYjQd9SpndP8wXnVz,https://api.spotify.com/v1/tracks/3p9pWFYjQd9SpndP8wXnVz,https://api.spotify.com/v1/audio-analysis/3p9pWFYjQd9SpndP8wXnVz,281800,3
+0.551,0.27,3,-12.808,1,0.0326,0.851,7.04e-06,0.0966,0.289,128.221,audio_features,17VegeBoHvMlIByrdu64KR,spotify:track:17VegeBoHvMlIByrdu64KR,https://api.spotify.com/v1/tracks/17VegeBoHvMlIByrdu64KR,https://api.spotify.com/v1/audio-analysis/17VegeBoHvMlIByrdu64KR,244227,4
+0.589,0.384,10,-15.075,0,0.0332,0.112,2.8e-05,0.0596,0.354,132.909,audio_features,1DnSZ9M8uvX0UebR3dmBNI,spotify:track:1DnSZ9M8uvX0UebR3dmBNI,https://api.spotify.com/v1/tracks/1DnSZ9M8uvX0UebR3dmBNI,https://api.spotify.com/v1/audio-analysis/1DnSZ9M8uvX0UebR3dmBNI,256427,4
+0.459,0.322,7,-12.912,1,0.0595,0.816,0,0.072,0.331,133.91,audio_features,7ytqdjooPEAa97QSu6NUHS,spotify:track:7ytqdjooPEAa97QSu6NUHS,https://api.spotify.com/v1/tracks/7ytqdjooPEAa97QSu6NUHS,https://api.spotify.com/v1/audio-analysis/7ytqdjooPEAa97QSu6NUHS,194427,1
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+"{'status': 429, 'message': 'API rate limit exceeded'}"

@@ -1,0 +1,12 @@
+danceability,energy,key,loudness,mode,speechiness,acousticness,instrumentalness,liveness,valence,tempo,type,id,uri,track_href,analysis_url,duration_ms,time_signature
+0.757,0.578,0,-3.886,1,0.0386,0.011,0.00672,0.127,0.954,102.96,audio_features,3y8AEUef1AVfr0npU5UOa9,spotify:track:3y8AEUef1AVfr0npU5UOa9,https://api.spotify.com/v1/tracks/3y8AEUef1AVfr0npU5UOa9,https://api.spotify.com/v1/audio-analysis/3y8AEUef1AVfr0npU5UOa9,280427,4
+0.647,0.291,2,-8.275,0,0.0363,0.408,0,0.0772,0.4,119.839,audio_features,7ID2dydg1QFuWObmdhwzfm,spotify:track:7ID2dydg1QFuWObmdhwzfm,https://api.spotify.com/v1/tracks/7ID2dydg1QFuWObmdhwzfm,https://api.spotify.com/v1/audio-analysis/7ID2dydg1QFuWObmdhwzfm,277707,3
+0.548,0.532,5,-7.596,1,0.0323,0.186,0.000263,0.217,0.405,85.03,audio_features,3rq5w4bQGigXOfdN30ATJt,spotify:track:3rq5w4bQGigXOfdN30ATJt,https://api.spotify.com/v1/tracks/3rq5w4bQGigXOfdN30ATJt,https://api.spotify.com/v1/audio-analysis/3rq5w4bQGigXOfdN30ATJt,272394,4
+0.53,0.884,0,-5.581,0,0.457,0.332,1.98e-06,0.355,0.28,87.194,audio_features,3fpTMuD1u3gJlVI4FadVHs,spotify:track:3fpTMuD1u3gJlVI4FadVHs,https://api.spotify.com/v1/tracks/3fpTMuD1u3gJlVI4FadVHs,https://api.spotify.com/v1/audio-analysis/3fpTMuD1u3gJlVI4FadVHs,319387,4
+0.673,0.532,2,-7.229,1,0.0489,0.00873,0,0.128,0.152,139.999,audio_features,4HfsgrdwKNkytFkuuG3w4n,spotify:track:4HfsgrdwKNkytFkuuG3w4n,https://api.spotify.com/v1/tracks/4HfsgrdwKNkytFkuuG3w4n,https://api.spotify.com/v1/audio-analysis/4HfsgrdwKNkytFkuuG3w4n,259720,4
+0.861,0.725,1,-7.091,1,0.312,0.24,1.58e-06,0.296,0.67,98.151,audio_features,45W7VrNiHWyyov4A6DDOPi,spotify:track:45W7VrNiHWyyov4A6DDOPi,https://api.spotify.com/v1/tracks/45W7VrNiHWyyov4A6DDOPi,https://api.spotify.com/v1/audio-analysis/45W7VrNiHWyyov4A6DDOPi,223573,4
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+"{'status': 429, 'message': 'API rate limit exceeded'}"

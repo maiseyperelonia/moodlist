@@ -1,0 +1,16 @@
+danceability,energy,key,loudness,mode,speechiness,acousticness,instrumentalness,liveness,valence,tempo,type,id,uri,track_href,analysis_url,duration_ms,time_signature
+0.581,0.78,4,-7.053,1,0.0567,0.508,1.07e-05,0.0799,0.561,123.711,audio_features,0bfvHnWWOeU1U5XeKyVLbW,spotify:track:0bfvHnWWOeU1U5XeKyVLbW,https://api.spotify.com/v1/tracks/0bfvHnWWOeU1U5XeKyVLbW,https://api.spotify.com/v1/audio-analysis/0bfvHnWWOeU1U5XeKyVLbW,203680,4
+0.632,0.59,5,-10.206,1,0.0305,0.346,0,0.24,0.953,130.287,audio_features,455HSLQfOn9vxG6UjzoTWw,spotify:track:455HSLQfOn9vxG6UjzoTWw,https://api.spotify.com/v1/tracks/455HSLQfOn9vxG6UjzoTWw,https://api.spotify.com/v1/audio-analysis/455HSLQfOn9vxG6UjzoTWw,172733,4
+0.764,0.567,0,-13.361,1,0.0412,0.252,0,0.104,0.79,108.805,audio_features,2RwFdFIN9JAyVUzevwkzez,spotify:track:2RwFdFIN9JAyVUzevwkzez,https://api.spotify.com/v1/tracks/2RwFdFIN9JAyVUzevwkzez,https://api.spotify.com/v1/audio-analysis/2RwFdFIN9JAyVUzevwkzez,214133,4
+0.79,0.349,10,-13.265,1,0.065,0.206,0,0.168,0.696,115.365,audio_features,2DxX9x7Cmywikp14l1YUdk,spotify:track:2DxX9x7Cmywikp14l1YUdk,https://api.spotify.com/v1/tracks/2DxX9x7Cmywikp14l1YUdk,https://api.spotify.com/v1/audio-analysis/2DxX9x7Cmywikp14l1YUdk,166067,4
+0.399,0.326,7,-9.239,0,0.0386,0.864,0,0.191,0.546,79.206,audio_features,61S0mEfdRtJ62Fc7fPqx0U,spotify:track:61S0mEfdRtJ62Fc7fPqx0U,https://api.spotify.com/v1/tracks/61S0mEfdRtJ62Fc7fPqx0U,https://api.spotify.com/v1/audio-analysis/61S0mEfdRtJ62Fc7fPqx0U,174000,4
+0.587,0.133,9,-15.151,0,0.0565,0.186,2.26e-05,0.258,0.068,102.938,audio_features,36AlMHDBFwSsD3FQOy1R81,spotify:track:36AlMHDBFwSsD3FQOy1R81,https://api.spotify.com/v1/tracks/36AlMHDBFwSsD3FQOy1R81,https://api.spotify.com/v1/audio-analysis/36AlMHDBFwSsD3FQOy1R81,201733,4
+0.556,0.171,10,-14.536,1,0.0444,0.457,0.000324,0.0797,0.404,178.205,audio_features,0JoqdwiF0FKwK1XubPjb85,spotify:track:0JoqdwiF0FKwK1XubPjb85,https://api.spotify.com/v1/tracks/0JoqdwiF0FKwK1XubPjb85,https://api.spotify.com/v1/audio-analysis/0JoqdwiF0FKwK1XubPjb85,173200,3
+0.499,0.246,9,-12.806,1,0.0325,0.7,0.00227,0.0965,0.152,148.468,audio_features,4pdLyulbYLCrPmDzWWeJIZ,spotify:track:4pdLyulbYLCrPmDzWWeJIZ,https://api.spotify.com/v1/tracks/4pdLyulbYLCrPmDzWWeJIZ,https://api.spotify.com/v1/audio-analysis/4pdLyulbYLCrPmDzWWeJIZ,181667,3
+0.74,0.322,0,-9.26,1,0.0399,0.551,0.000763,0.17,0.629,102.889,audio_features,5zQyqgNXKzhifkivumzxDS,spotify:track:5zQyqgNXKzhifkivumzxDS,https://api.spotify.com/v1/tracks/5zQyqgNXKzhifkivumzxDS,https://api.spotify.com/v1/audio-analysis/5zQyqgNXKzhifkivumzxDS,175853,4
+0.511,0.769,4,-7.032,1,0.042,0.181,0,0.0921,0.818,129.657,audio_features,2G2YzndIA6jeWFPBXhUjh5,spotify:track:2G2YzndIA6jeWFPBXhUjh5,https://api.spotify.com/v1/tracks/2G2YzndIA6jeWFPBXhUjh5,https://api.spotify.com/v1/audio-analysis/2G2YzndIA6jeWFPBXhUjh5,160907,4
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+"{'status': 429, 'message': 'API rate limit exceeded'}"
+"{'status': 429, 'message': 'API rate limit exceeded'}"
