@@ -17,7 +17,9 @@
                     "lonely",
                     "stay",
                     "hurt",
-                    "breakup"
+                    "breakup",
+                    "cry",
+                    "glimpse of us"
                 ]
             },       
             "Happy": {
@@ -69,7 +71,11 @@
                     "cheesed", 
                     "fuming",
                     "mad ",
-                    "livid"
+                    "livid",
+                    "cheat",
+                    "bitch",
+                    "liar",
+                    "stab"
                 ]
             },
             "Love" : {
@@ -81,7 +87,10 @@
                     "romance",
                     "rom-com",
                     "sex",
-                    "horny"
+                    "horny",
+                    "husband",
+                    "wedding",
+                    "marriage"
                 ]
             },
             "Calm" : {

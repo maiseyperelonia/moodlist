@@ -8,6 +8,7 @@ import time
 import os
 import csv
 import json
+import pandas as pd
 import requests
 
 
@@ -77,8 +78,15 @@ def get_playlists(path):
                         pName = playlist["name"]
                         
                         if (pName.find(keyword) != -1):
+<<<<<<< HEAD
                             if (label == "Calm"):
                                 insert_songs(label, playlist, file_num)
+=======
+                            if (label == "Happy"):
+                                insert_songs(label, playlist, file_num)
+                                print(pName," -- ", label)
+                            #print_playlist(playlist)
+>>>>>>> 1ce1851 (added happy files)
                     file_num += 1
 
 def insert_songs(label, playlist, file_num):
@@ -89,7 +97,11 @@ def insert_songs(label, playlist, file_num):
         track_info = get_song_info(track_id).json()
 
         if(song_cnt == 0):
+<<<<<<< HEAD
             #print("creating csv for file: ", file_num)
+=======
+            # print("creating csv for file: ", file_num)
+>>>>>>> 1ce1851 (added happy files)
             create_csv(label, track_info, file_num)
 
         if(song_cnt == 9):
@@ -108,14 +120,14 @@ def insert_songs(label, playlist, file_num):
 
 def create_csv(label, track, file_num):
     
-    file_name = "../feature_data/" + label + "_" + str(file_num) + ".csv"
+    file_name = "../feature_data/" + label + "/" + str(file_num) + ".csv"
     with open(file_name,'w', newline='') as fd:
 
         writer = csv.writer(fd)
         writer.writerow(track.keys())
 
 def write_csv(label, track, file_num):
-    file_name = "../feature_data/" + label + "_" + str(file_num) + ".csv"
+    file_name = "../feature_data/" + label + "/" + str(file_num) + ".csv"
     with open(file_name,'a', newline='') as fd:
         writer = csv.writer(fd)
         writer.writerow(track.values())
@@ -148,6 +160,9 @@ def print_playlist(playlist):
             % (i + 1, track["track_name"], track["album_name"], track["artist_name"])
         )
     print()
+
+def visualize_data():
+
 
 if __name__ == "__main__":
     path = "../SpotifyDataset/data"
