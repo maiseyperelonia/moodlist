@@ -12,6 +12,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import plotly as px
 import requests
+import splitfolders
 
 
 def get_spotify_token():
@@ -80,9 +81,9 @@ def get_playlists(path):
                         pName = playlist["name"]
                         
                         if (pName.find(keyword) != -1):
-                            if (label == "Happy"):
+                            if (label == "Love"):
                                 insert_songs(label, playlist, file_num)
-                                print(pName," -- ", label)
+                                #print(pName," -- ", label)
                             #print_playlist(playlist)
                     file_num += 1
 
@@ -176,10 +177,10 @@ def visualize_data():
             label_list = pd.concat([label_list,feature_list])
             
             
-            # pd.concat([label_list, feature_list])
-            # print(label_list)
+            pd.concat([label_list, feature_list])
+            print(label_list)
         
-        #new_df = label_list.data.iris()
+        new_df = label_list.data.iris()
         label_list.plot.scatter(x='valence',y='energy', c='loudness', colormap="viridis")
         label_list.plot.scatter(x='danceability',y='acousticness', c='valence', colormap="viridis")
         plt.show()
@@ -190,14 +191,17 @@ def visualize_data():
     all_labels.plot(x="mood",y=['valence','danceability','tempo','loudness','energy','acousticness'])
     plt.show()
     print(all_labels)
-            
+
+def split_data():
+    directory = "../feature_data/"
+    splitfolders.ratio(directory, output='input_data', seed=1337, ratio=(0.6, 0.2,0.2)) 
             
 if __name__ == "__main__":
     path = "../SpotifyDataset/data"
     auth = spotify_auth()
     #get_playlists(path)
-    visualize_data()
+    #visualize_data()
     #print_playlists(auth)
     #write_csv()
-
+    split_data()
     #process_playlists(path)
