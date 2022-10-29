@@ -9,6 +9,8 @@ import os
 import csv
 import json
 import pandas as pd
+import matplotlib.pyplot as plt
+import plotly as px
 import requests
 
 
@@ -78,15 +80,10 @@ def get_playlists(path):
                         pName = playlist["name"]
                         
                         if (pName.find(keyword) != -1):
-<<<<<<< HEAD
-                            if (label == "Calm"):
-                                insert_songs(label, playlist, file_num)
-=======
                             if (label == "Happy"):
                                 insert_songs(label, playlist, file_num)
                                 print(pName," -- ", label)
                             #print_playlist(playlist)
->>>>>>> 1ce1851 (added happy files)
                     file_num += 1
 
 def insert_songs(label, playlist, file_num):
@@ -97,11 +94,7 @@ def insert_songs(label, playlist, file_num):
         track_info = get_song_info(track_id).json()
 
         if(song_cnt == 0):
-<<<<<<< HEAD
             #print("creating csv for file: ", file_num)
-=======
-            # print("creating csv for file: ", file_num)
->>>>>>> 1ce1851 (added happy files)
             create_csv(label, track_info, file_num)
 
         if(song_cnt == 9):
@@ -162,12 +155,48 @@ def print_playlist(playlist):
     print()
 
 def visualize_data():
+    directory = "../feature_data/"
 
+    #for name in directory:
 
+    all_labels = pd.DataFrame()
+    for label_folder in os.listdir(directory):
+        label_folder = label_folder + "/"
+        print("next label", label_folder)
+        label_list = pd.DataFrame()
+        num = 0
+        for filename in os.listdir(directory+label_folder):
+            df = pd.read_csv(directory+label_folder+filename)
+            #mean = df.mean()
+            num+=1
+            df[['loudness','tempo']] = (df[['loudness','tempo']] - df[['loudness','tempo']].min())/(df[['loudness','tempo']].max() - df[['loudness','tempo']].min())
+            features = df[['valence', 'loudness', 'energy', 'danceability', 'tempo', 'acousticness']].median()
+            feature_list = features.to_frame().T
+            label_list['index'] = filename
+            label_list = pd.concat([label_list,feature_list])
+            
+            
+            # pd.concat([label_list, feature_list])
+            # print(label_list)
+        
+        #new_df = label_list.data.iris()
+        label_list.plot.scatter(x='valence',y='energy', c='loudness', colormap="viridis")
+        label_list.plot.scatter(x='danceability',y='acousticness', c='valence', colormap="viridis")
+        plt.show()
+        label_list = label_list.median().to_frame().T
+        all_labels = pd.concat([all_labels, label_list])
+    
+    all_labels['mood'] = ['Angry','Calm','Happy','Sad']
+    all_labels.plot(x="mood",y=['valence','danceability','tempo','loudness','energy','acousticness'])
+    plt.show()
+    print(all_labels)
+            
+            
 if __name__ == "__main__":
     path = "../SpotifyDataset/data"
     auth = spotify_auth()
-    get_playlists(path)
+    #get_playlists(path)
+    visualize_data()
     #print_playlists(auth)
     #write_csv()
 

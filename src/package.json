@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "plotly": "^1.0.6"
+  }
+}
