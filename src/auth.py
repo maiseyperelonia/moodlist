@@ -14,7 +14,6 @@ import plotly as px
 import requests
 import splitfolders
 
-
 def get_spotify_token():
     AUTH_URL = 'https://accounts.spotify.com/api/token'
     auth_response = requests.post(AUTH_URL, {
