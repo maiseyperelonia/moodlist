@@ -1,6 +1,10 @@
 danceability,energy,key,loudness,mode,speechiness,acousticness,instrumentalness,liveness,valence,tempo,type,id,uri,track_href,analysis_url,duration_ms,time_signature
-0.793,0.31,5,-5.256,1,0.052,0.0505,0.0875,0.0617,0.25,75.989,audio_features,3cDdNiSpGwgLosEwufaiTK,spotify:track:3cDdNiSpGwgLosEwufaiTK,https://api.spotify.com/v1/tracks/3cDdNiSpGwgLosEwufaiTK,https://api.spotify.com/v1/audio-analysis/3cDdNiSpGwgLosEwufaiTK,267046,4
-0.841,0.3,8,-13.286,1,0.185,0.615,0.661,0.0957,0.337,145.017,audio_features,3nKKsoq3GNbHSV6Q9d5g3d,spotify:track:3nKKsoq3GNbHSV6Q9d5g3d,https://api.spotify.com/v1/tracks/3nKKsoq3GNbHSV6Q9d5g3d,https://api.spotify.com/v1/audio-analysis/3nKKsoq3GNbHSV6Q9d5g3d,220138,4
-0.68,0.241,6,-11.448,0,0.247,0.549,2.54e-05,0.222,0.211,127.908,audio_features,7uNWZOCm6TphuTnwpDUUjN,spotify:track:7uNWZOCm6TphuTnwpDUUjN,https://api.spotify.com/v1/tracks/7uNWZOCm6TphuTnwpDUUjN,https://api.spotify.com/v1/audio-analysis/7uNWZOCm6TphuTnwpDUUjN,230540,4
-0.676,0.709,0,-3.563,0,0.0826,0.107,3.28e-06,0.0912,0.275,141.986,audio_features,6eEZH8Y3lgmILNqt6SP1Xn,spotify:track:6eEZH8Y3lgmILNqt6SP1Xn,https://api.spotify.com/v1/tracks/6eEZH8Y3lgmILNqt6SP1Xn,https://api.spotify.com/v1/audio-analysis/6eEZH8Y3lgmILNqt6SP1Xn,201127,4
-0.819,0.321,1,-15.578,1,0.12,0.466,0.855,0.102,0.111,128.046,audio_features,3zeUsBriXyndNol039cCFE,spotify:track:3zeUsBriXyndNol039cCFE,https://api.spotify.com/v1/tracks/3zeUsBriXyndNol039cCFE,https://api.spotify.com/v1/audio-analysis/3zeUsBriXyndNol039cCFE,129675,4
+0.793,0.31,5.0,0.8590928006658344,1.0,0.052,0.0505,0.0875,0.0617,0.25,0.0,audio_features,3cDdNiSpGwgLosEwufaiTK,spotify:track:3cDdNiSpGwgLosEwufaiTK,https://api.spotify.com/v1/tracks/3cDdNiSpGwgLosEwufaiTK,https://api.spotify.com/v1/audio-analysis/3cDdNiSpGwgLosEwufaiTK,267046.0,4.0
+0.841,0.3,8.0,0.1907615480649188,1.0,0.185,0.615,0.661,0.0957,0.337,1.0,audio_features,3nKKsoq3GNbHSV6Q9d5g3d,spotify:track:3nKKsoq3GNbHSV6Q9d5g3d,https://api.spotify.com/v1/tracks/3nKKsoq3GNbHSV6Q9d5g3d,https://api.spotify.com/v1/audio-analysis/3nKKsoq3GNbHSV6Q9d5g3d,220138.0,4.0
+0.68,0.241,6.0,0.3437369954223886,0.0,0.247,0.549,2.54e-05,0.222,0.211,0.7521440574839197,audio_features,7uNWZOCm6TphuTnwpDUUjN,spotify:track:7uNWZOCm6TphuTnwpDUUjN,https://api.spotify.com/v1/tracks/7uNWZOCm6TphuTnwpDUUjN,https://api.spotify.com/v1/audio-analysis/7uNWZOCm6TphuTnwpDUUjN,230540.0,4.0
+0.676,0.709,0.0,1.0,0.0,0.0826,0.107,3.28e-06,0.0912,0.275,0.9560902822043228,audio_features,6eEZH8Y3lgmILNqt6SP1Xn,spotify:track:6eEZH8Y3lgmILNqt6SP1Xn,https://api.spotify.com/v1/tracks/6eEZH8Y3lgmILNqt6SP1Xn,https://api.spotify.com/v1/audio-analysis/6eEZH8Y3lgmILNqt6SP1Xn,201127.0,4.0
+0.819,0.321,1.0,0.0,1.0,0.12,0.466,0.855,0.102,0.111,0.7541432462189256,audio_features,3zeUsBriXyndNol039cCFE,spotify:track:3zeUsBriXyndNol039cCFE,https://api.spotify.com/v1/tracks/3zeUsBriXyndNol039cCFE,https://api.spotify.com/v1/audio-analysis/3zeUsBriXyndNol039cCFE,129675.0,4.0
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
