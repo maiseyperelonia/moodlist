@@ -168,7 +168,6 @@ def visualize_data():
         num = 0
         for filename in os.listdir(directory+label_folder):
             df = pd.read_csv(directory+label_folder+filename)
-            #mean = df.mean()
             num+=1
             df[['loudness','tempo']] = (df[['loudness','tempo']] - df[['loudness','tempo']].min())/(df[['loudness','tempo']].max() - df[['loudness','tempo']].min())
             features = df[['valence', 'loudness', 'energy', 'danceability', 'tempo', 'acousticness']].median()
