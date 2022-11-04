@@ -10,9 +10,6 @@ danceability,energy,key,loudness,mode,speechiness,acousticness,instrumentalness,
 0.754,0.653,8.0,0.5111451822148838,0.0,0.266,0.517,3.94e-05,0.561,0.558,1.0,audio_features,4cROwMEQna9GgrAcR64io3,spotify:track:4cROwMEQna9GgrAcR64io3,https://api.spotify.com/v1/tracks/4cROwMEQna9GgrAcR64io3,https://api.spotify.com/v1/audio-analysis/4cROwMEQna9GgrAcR64io3,189187.0,4.0
 0.652,0.886,0.0,0.8348861894091285,1.0,0.0617,0.06,0.0,0.253,0.72,0.2414370432959365,audio_features,7vb1OuOxhASmTXtsqWZlSL,spotify:track:7vb1OuOxhASmTXtsqWZlSL,https://api.spotify.com/v1/tracks/7vb1OuOxhASmTXtsqWZlSL,https://api.spotify.com/v1/audio-analysis/7vb1OuOxhASmTXtsqWZlSL,184118.0,4.0
 0.638,0.953,9.0,0.9798325274206864,1.0,0.0621,0.016,0.0,0.177,0.663,0.3118027194917774,audio_features,5MfOp4knPmxoWSKXIlcwKz,spotify:track:5MfOp4knPmxoWSKXIlcwKz,https://api.spotify.com/v1/tracks/5MfOp4knPmxoWSKXIlcwKz,https://api.spotify.com/v1/audio-analysis/5MfOp4knPmxoWSKXIlcwKz,214787.0,4.0
-"{'status': 429, 'message': 'API rate limit exceeded'}",,,,,,,,,,,,,,,,,
-"{'status': 429, 'message': 'API rate limit exceeded'}",,,,,,,,,,,,,,,,,
-"{'status': 429, 'message': 'API rate limit exceeded'}",,,,,,,,,,,,,,,,,
 0.766,0.708,0.0,0.4423870739473994,1.0,0.043,0.136,0.0581,0.0696,0.678,0.5156863665524418,audio_features,1ANOBUcN7gawozJ0ZJRHBo,spotify:track:1ANOBUcN7gawozJ0ZJRHBo,https://api.spotify.com/v1/tracks/1ANOBUcN7gawozJ0ZJRHBo,https://api.spotify.com/v1/audio-analysis/1ANOBUcN7gawozJ0ZJRHBo,280000.0,4.0
 0.822,0.544,0.0,0.5491213586507843,1.0,0.0332,0.562,2.4e-05,0.144,0.861,0.5477006368430111,audio_features,4nMlau89VAjmV7agkl7OY3,spotify:track:4nMlau89VAjmV7agkl7OY3,https://api.spotify.com/v1/tracks/4nMlau89VAjmV7agkl7OY3,https://api.spotify.com/v1/audio-analysis/4nMlau89VAjmV7agkl7OY3,198001.0,4.0
 ,,,,,,,,,,,,,,,,,
