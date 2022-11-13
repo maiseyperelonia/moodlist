@@ -151,12 +151,13 @@ if __name__ == "__main__":
     test_data = Music_Data(pathname + '\input_data\\test')
     title = ['danceability', 'energy', 'loudness', 'acousticness', 'valence', 'tempo', 'mood']
     # remove unnecessary columns and convert array to float
-    #train_feature_data = train_data.keep_columns([0, 1, 3, 6, 9, 10, 18]) # dance, energy, loudness, acousticness, valence, tempo, mood
+    train_feature_data = train_data.keep_columns([0, 1, 3, 6, 9, 10, 18]) # dance, energy, loudness, acousticness, valence, tempo, mood
     #print(train_feature_data[0])
     #val_feature_data = val_data.keep_columns([0, 1, 3, 6, 9, 10, 18])
     test_feature_data = test_data.keep_columns([0, 1, 3, 6, 9, 10, 18])
     #print(feature_data[0:5,:])    
-    #df_train = pd.DataFrame(train_feature_data, columns = title)
+    df_train = pd.DataFrame(train_feature_data, columns = title)
     df_test = pd.DataFrame(test_feature_data, columns = title)
-    #print(df_train)
+    print(df_train)
     print(df_test)
+    moods = ['Angry', 'Calm', 'Happy', 'Love', 'Sad']
