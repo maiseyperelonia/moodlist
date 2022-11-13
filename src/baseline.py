@@ -130,4 +130,3 @@ if __name__ == "__main__":
         print(f'the accuracy on {i} max depth:')
         train_score, test_score = fit_and_score_model(mdl, X_train, X_test, y_train, y_test, random_state = 1)
         scores.append(test_score)
-    
