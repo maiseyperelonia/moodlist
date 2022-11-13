@@ -25,7 +25,7 @@ if torch.cuda.is_available():
     torch.cuda.manual_seed_all(125)
 
 # First time run, downloads 823MB file for GloVe
-glove = torchtext.vocab.GloVe(name="6B", dim=50) 
+#glove = torchtext.vocab.GloVe(name="6B", dim=50) 
 # # load data 
 # def load_data():
 #     train_dataset = dsets.MNIST(root='./data', train=True, transform=transforms.ToTensor(),download=True)
@@ -57,7 +57,6 @@ class Music_Data:
             csv_files = glob.glob(os.path.join(total, "*.csv"))
             for file in csv_files:
                 # read the csv file
-                
                 df = pd.read_csv(file)
                 with open(file) as fd:
                     reader = csv.reader(fd, delimiter=',')
@@ -70,7 +69,8 @@ class Music_Data:
                         for field in row:
                             if field == "{'status': 429, 'message': 'API rate limit exceeded'}":
                                 print(file)
-        self.data = np.array(data_orig, dtype=object)
+        print(data_orig)
+        self.data = torch.Tensor(data_orig)
         
     def keep_columns(self, L):
         """Select Features """           
@@ -144,6 +144,37 @@ class SpotifyRNN(nn.Module):
         # Pass the output of the last step to the classifier
         return self.fc(out[:,-1,:])
 
+class LSTM(nn.Module):
+
+    def __init__(self, num_classes, input_size, hidden_size, num_layers):
+        super(LSTM, self).__init__()
+        
+        self.num_classes = num_classes
+        self.num_layers = num_layers
+        self.input_size = input_size
+        self.hidden_size = hidden_size
+        self.seq_length = seq_length
+        
+        self.lstm = nn.LSTM(input_size=input_size, hidden_size=hidden_size,
+                            num_layers=num_layers, batch_first=True)
+        
+        self.fc = nn.Linear(hidden_size, num_classes)
+
+    def forward(self, x):
+        h_0 = Variable(torch.zeros(
+            self.num_layers, x.size(0), self.hidden_size))
+        
+        c_0 = Variable(torch.zeros(
+            self.num_layers, x.size(0), self.hidden_size))
+        
+        # Propagate input through LSTM
+        ula, (h_out, _) = self.lstm(x, (h_0, c_0))
+        
+        h_out = h_out.view(-1, self.hidden_size)
+        
+        out = self.fc(h_out)
+        
+        return out
 if __name__ == "__main__":
     # call function to prepare data structure
     pathname = os.getcwd()

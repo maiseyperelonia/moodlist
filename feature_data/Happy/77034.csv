@@ -14,5 +14,3 @@ danceability,energy,key,loudness,mode,speechiness,acousticness,instrumentalness,
 0.748,0.524,8,-5.599,1,0.0338,0.414,0,0.111,0.661,95.01,audio_features,7BKLCZ1jbUBVqRi2FVlTVw,spotify:track:7BKLCZ1jbUBVqRi2FVlTVw,https://api.spotify.com/v1/tracks/7BKLCZ1jbUBVqRi2FVlTVw,https://api.spotify.com/v1/audio-analysis/7BKLCZ1jbUBVqRi2FVlTVw,244960,4
 0.58,0.532,1,-5.668,0,0.0424,0.294,0,0.0948,0.39,112.049,audio_features,6WAxKNbZoGNzQTIvdMqkFs,spotify:track:6WAxKNbZoGNzQTIvdMqkFs,https://api.spotify.com/v1/tracks/6WAxKNbZoGNzQTIvdMqkFs,https://api.spotify.com/v1/audio-analysis/6WAxKNbZoGNzQTIvdMqkFs,206400,4
 0.389,0.665,0,-6.169,1,0.0644,0.178,0.000732,0.116,0.199,117.055,audio_features,7lGKEWMXVWWTt3X71Bv44I,spotify:track:7lGKEWMXVWWTt3X71Bv44I,https://api.spotify.com/v1/tracks/7lGKEWMXVWWTt3X71Bv44I,https://api.spotify.com/v1/audio-analysis/7lGKEWMXVWWTt3X71Bv44I,193547,4
-"{'status': 429, 'message': 'API rate limit exceeded'}"
-"{'status': 429, 'message': 'API rate limit exceeded'}"
