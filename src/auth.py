@@ -11,8 +11,8 @@ import json
 import pandas as pd
 import matplotlib.pyplot as plt
 import plotly as px
+#import splitfolders
 import requests
-import splitfolders
 
 def get_spotify_token():
     AUTH_URL = 'https://accounts.spotify.com/api/token'
@@ -176,10 +176,9 @@ def visualize_data():
             
             
             pd.concat([label_list, feature_list])
-            print(label_list)
         
-        new_df = label_list.data.iris()
-        label_list.plot.scatter(x='valence',y='energy', c='loudness', colormap="viridis")
+        print(label_folder)
+        #label_list.plot.scatter(x='valence',y='energy', c='loudness', colormap="viridis")
         label_list.plot.scatter(x='danceability',y='acousticness', c='valence', colormap="viridis")
         plt.show()
         label_list = label_list.median().to_frame().T
@@ -211,15 +210,15 @@ def normalize_data():
 
 def split_data():
     directory = "../feature_data/"
-    splitfolders.ratio(directory, output='input_data', seed=1337, ratio=(0.6, 0.2,0.2)) 
+    #splitfolders.ratio(directory, output='input_data', seed=1337, ratio=(0.6, 0.2,0.2)) 
             
 if __name__ == "__main__":
     path = "../SpotifyDataset/data"
     auth = spotify_auth()
     #get_playlists(path)
-    #visualize_data()
+    visualize_data()
     #print_playlists(auth)
     #write_csv()
-    split_data()
+    #split_data()
     #normalize_data()
     #process_playlists(path)
