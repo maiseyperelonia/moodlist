@@ -167,6 +167,10 @@ def visualize_data():
         num = 0
         for filename in os.listdir(directory+label_folder):
             df = pd.read_csv(directory+label_folder+filename)
+<<<<<<< HEAD
+=======
+            #mean = df.mean()
+>>>>>>> rnn_model
             num+=1
             df[['loudness','tempo']] = (df[['loudness','tempo']] - df[['loudness','tempo']].min())/(df[['loudness','tempo']].max() - df[['loudness','tempo']].min())
             features = df[['valence', 'loudness', 'energy', 'danceability', 'tempo', 'acousticness']].median()
@@ -175,10 +179,18 @@ def visualize_data():
             label_list = pd.concat([label_list,feature_list])
             
             
+<<<<<<< HEAD
             pd.concat([label_list, feature_list])
         
         print(label_folder)
         #label_list.plot.scatter(x='valence',y='energy', c='loudness', colormap="viridis")
+=======
+            # pd.concat([label_list, feature_list])
+            # print(label_list)
+        
+        #new_df = label_list.data.iris()
+        # label_list.plot.scatter(x='valence',y='energy', c='loudness', colormap="viridis")
+>>>>>>> rnn_model
         label_list.plot.scatter(x='danceability',y='acousticness', c='valence', colormap="viridis")
         plt.show()
         label_list = label_list.median().to_frame().T
@@ -188,6 +200,7 @@ def visualize_data():
     all_labels.plot(x="mood",y=['valence','danceability','tempo','loudness','energy','acousticness'])
     plt.show()
     print(all_labels)
+<<<<<<< HEAD
 
 def normalize_data():
     directory = "../feature_data/"
@@ -211,6 +224,9 @@ def normalize_data():
 def split_data():
     directory = "../feature_data/"
     #splitfolders.ratio(directory, output='input_data', seed=1337, ratio=(0.6, 0.2,0.2)) 
+=======
+            
+>>>>>>> rnn_model
             
 if __name__ == "__main__":
     path = "../SpotifyDataset/data"
