@@ -1,43 +1,28 @@
-import torch
-import torchtext
-import torch.nn as nn
-from torch.autograd import Variable
-import torchvision.transforms as transforms
-import torchvision.datasets as dsets
-from torch import Tensor
-import torch.nn.functional as F
-import torchdata.datapipes as dp
+import csv
 import glob
 import os
+import random
+
 import pandas as pd
-import csv
-import numpy as np
+import torch
+from torch import nn
+from torch import autograd
+from torch import optim
+import torch.nn.functional as F
 
-import pdb
-import math
+torch.set_num_threads(8)
+torch.manual_seed(1)
+random.seed(1)
 
-cuda = True if torch.cuda.is_available() else False
+# Giraffes are the best ~  Anne Chow
+""" cuda = True if torch.cuda.is_available() else False
     
 Tensor = torch.cuda.FloatTensor if cuda else torch.FloatTensor    
 
 torch.manual_seed(125)
 if torch.cuda.is_available():
-    torch.cuda.manual_seed_all(125)
+    torch.cuda.manual_seed_all(125) """
 
-# First time run, downloads 823MB file for GloVe
-#glove = torchtext.vocab.GloVe(name="6B", dim=50) 
-# # load data 
-# def load_data():
-#     train_dataset = dsets.MNIST(root='./data', train=True, transform=transforms.ToTensor(),download=True)
-#     test_dataset = dsets.MNIST(root='./data', train=False, transform=transforms.ToTensor())
-
-#     batch_size = 100
-#     n_iters = 6000
-#     num_epochs = n_iters / (len(train_dataset) / batch_size)
-#     num_epochs = int(num_epochs)
-    
-#     train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True)
-#     test_loader = torch.utils.data.DataLoader(dataset=test_dataset, batch_size=batch_size, shuffle=False)
 
 # Load Data
 # Helper Music_Data Class
@@ -66,10 +51,9 @@ class Music_Data:
                         if count > 0 and row[0] != '':
                             data_orig.append(row)
                         count += 1
-                        for field in row:
-                            if field == "{'status': 429, 'message': 'API rate limit exceeded'}":
-                                print(file)
+
         print(data_orig)
+        # converts input data into a tensor
         self.data = torch.Tensor(data_orig)
         
     def keep_columns(self, L):
@@ -78,113 +62,81 @@ class Music_Data:
         feature_data = feature_data.astype(float)
         return feature_data
 
+        
+class LSTM_RNN(nn.Module):
 
-# # LSTM cell implementation
-# class LSTMCell(nn.Module):
+    def __init__(self, embedding_dim, hidden_dim, vocab_size, label_size):
+        super(LSTM_RNN, self).__init__()
+        self.hidden_dim = hidden_dim
+        self.word_embeddings = nn.Embedding(vocab_size, embedding_dim)
+        self.lstm = nn.LSTM(embedding_dim, hidden_dim)
+        self.hidden2label = nn.Linear(hidden_dim, label_size)
+        self.hidden = self.init_hidden()
+    def init_hidden(self):
+        # the first is the hidden h
+        # the second is the cell  c
+        return (autograd.Variable(torch.zeros(1, 1, self.hidden_dim)),
+                autograd.Variable(torch.zeros(1, 1, self.hidden_dim)))
 
-#     def __init__(self, input_size, hidden_size, bias=True):
-#         super(LSTMCell, self).__init__()
-#         self.input_size = input_size
-#         self.hidden_size = hidden_size
-#         self.bias = bias
-#         self.x2h = nn.Linear(input_size, 4 * hidden_size, bias=bias)
-#         self.h2h = nn.Linear(hidden_size, 4 * hidden_size, bias=bias)
-#         self.c2c = Tensor(hidden_size * 3)
-#         self.reset_parameters()
+    def forward(self, song):
+        embeds = self.word_embeddings(song)
+        x = embeds.view(len(song), 1, -1)
+        lstm_out, self.hidden = self.lstm(x, self.hidden)
+        y  = self.hidden2label(lstm_out[-1])
+        log_probs = F.log_softmax(y)
+        return log_probs
+        
+
+def get_accuracy(truth, pred):
+    assert len(truth)==len(pred)
+    right = 0
+    for i in range(len(truth)):
+        if truth[i]==pred[i]:
+            right += 1.0
+    return right/len(truth)
+
+def train():
+    train_data, dev_data, test_data, word_to_ix, label_to_ix = feature_data.load_MR_data()
+    EMBEDDING_DIM = 50
+    HIDDEN_DIM = 50
+    EPOCH = 100
+    best_dev_acc = 0.0
+    model = LSTM_RNN(embedding_dim=EMBEDDING_DIM,hidden_dim=HIDDEN_DIM,
+                           vocab_size=len(word_to_ix),label_size=len(label_to_ix))
+    loss_function = nn.NLLLoss()
+    optimizer = optim.Adam(model.parameters(),lr = 1e-3)
+
+    no_up = 0
+    for i in range(EPOCH): 
+        random.shuffle(train_data)
+        print('epoch: %d start!' % i)
+        train_epoch(model, train_data, loss_function, optimizer, word_to_ix, label_to_ix, i)
+        print('now best dev acc:',best_dev_acc)
+        dev_acc = evaluate(model,dev_data,loss_function,word_to_ix,label_to_ix,'dev')
+        test_acc = evaluate(model, test_data, loss_function, word_to_ix, label_to_ix, 'test')
+        if dev_acc > best_dev_acc:
+            best_dev_acc = dev_acc
+            os.system('rm mr_best_model_acc_*.model')
+            print('New Best Dev!!!')
+            torch.save(model.state_dict(), 'best_models/mr_best_model_acc_' + str(int(test_acc*10000)) + '.model')
+            no_up = 0
+        else:
+            no_up += 1
+            if no_up >= 10:
+                exit()
 
 
-#     def reset_parameters(self):
-#         std = 1.0 / math.sqrt(self.hidden_size)
-#         for w in self.parameters():
-#             w.data.uniform_(-std, std)
-    
-#     def forward(self, x, hidden):
-#         #pdb.set_trace()
-#         hx, cx = hidden
-        
-#         x = x.view(-1, x.size(1))
-        
-#         gates = self.x2h(x) + self.h2h(hx)
-    
-#         gates = gates.squeeze()
-        
-#         c2c = self.c2c.unsqueeze(0)
-#         ci, cf, co = c2c.chunk(3,1)
-#         ingate, forgetgate, cellgate, outgate = gates.chunk(4, 1)
-        
-#         ingate = torch.sigmoid(ingate+ ci * cx)
-#         forgetgate = torch.sigmoid(forgetgate + cf * cx)
-#         cellgate = forgetgate*cx + ingate* torch.tanh(cellgate)
-#         outgate = torch.sigmoid(outgate+ co*cellgate)
-
-#         hm = outgate * F.tanh(cellgate)
-#         return (hm, cellgate)
-
-# create model class - Based on Lecture Slides
-class SpotifyRNN(nn.Module): 
-
-    def __init__(self, input_size, hidden_size, num_class): 
-        super(SpotifyRNN, self).__init__() 
-        #https://medium.com/analytics-vidhya/basics-of-using-pre-trained-glove-vectors-in-python-d38905f356db
-        #https://nlp.stanford.edu/projects/glove/
-        self.emb = nn.Embedding.from_pretrained(glove.vectors)
-        self.hidden_size = hidden_size 
-        self.rnn = nn.LSTM(input_size, hidden_size, batch_first=True) 
-        self.fc = nn.Linear(hidden_size, num_class)
-    
-    def forward(self, x): 
-        # Look-up the embeddings 
-        x = self.emb(x)
-        # Set the initial hidden states with zero
-        h0 = torch.zeros(1, x.size(0), self.hidden_size) 
-        # Initiate cell sate
-        c0 = torch.zeros(1, x.size(0), self.hidden_size) 
-        # Forward propagate the RNN 
-        out, __ = self.rnn(x, (h0, c0))
-        # Pass the output of the last step to the classifier
-        return self.fc(out[:,-1,:])
-
-class LSTM(nn.Module):
-
-    def __init__(self, num_classes, input_size, hidden_size, num_layers):
-        super(LSTM, self).__init__()
-        
-        self.num_classes = num_classes
-        self.num_layers = num_layers
-        self.input_size = input_size
-        self.hidden_size = hidden_size
-        self.seq_length = seq_length
-        
-        self.lstm = nn.LSTM(input_size=input_size, hidden_size=hidden_size,
-                            num_layers=num_layers, batch_first=True)
-        
-        self.fc = nn.Linear(hidden_size, num_classes)
-
-    def forward(self, x):
-        h_0 = Variable(torch.zeros(
-            self.num_layers, x.size(0), self.hidden_size))
-        
-        c_0 = Variable(torch.zeros(
-            self.num_layers, x.size(0), self.hidden_size))
-        
-        # Propagate input through LSTM
-        ula, (h_out, _) = self.lstm(x, (h_0, c_0))
-        
-        h_out = h_out.view(-1, self.hidden_size)
-        
-        out = self.fc(h_out)
-        
-        return out
-if __name__ == "__main__":
+if __name__ == "__main__": 
     # call function to prepare data structure
     pathname = os.getcwd()
     train_data = Music_Data(pathname + '\input_data\\train') 
+    val_data = Music_Data(pathname + '\input_data\val')
     test_data = Music_Data(pathname + '\input_data\\test')
     title = ['danceability', 'energy', 'loudness', 'acousticness', 'valence', 'tempo', 'mood']
     # remove unnecessary columns and convert array to float
     train_feature_data = train_data.keep_columns([0, 1, 3, 6, 9, 10, 18]) # dance, energy, loudness, acousticness, valence, tempo, mood
     #print(train_feature_data[0])
-    #val_feature_data = val_data.keep_columns([0, 1, 3, 6, 9, 10, 18])
+    val_feature_data = val_data.keep_columns([0, 1, 3, 6, 9, 10, 18])
     test_feature_data = test_data.keep_columns([0, 1, 3, 6, 9, 10, 18])
     #print(feature_data[0:5,:])    
     df_train = pd.DataFrame(train_feature_data, columns = title)
