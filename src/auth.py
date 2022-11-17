@@ -174,8 +174,6 @@ def visualize_data():
             feature_list = features.to_frame().T
             label_list['index'] = filename
             label_list = pd.concat([label_list,feature_list])
-            
-            
             # pd.concat([label_list, feature_list])
             # print(label_list)
         
@@ -213,7 +211,11 @@ def normalize_data():
 def split_data():
     directory = "../feature_data/"
     #splitfolders.ratio(directory, output='input_data', seed=1337, ratio=(0.6, 0.2,0.2)) 
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> 918937c (commiting to pull)
 if __name__ == "__main__":
     path = "../SpotifyDataset/data"
     auth = spotify_auth()
