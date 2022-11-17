@@ -5,16 +5,13 @@ import random
 
 import pandas as pd
 import torch
-from torch import nn
-from torch import autograd
-from torch import optim
 import torch.nn.functional as F
+from torch import autograd, nn, optim
 
-torch.set_num_threads(8)
 torch.manual_seed(1)
 random.seed(1)
 
-# Giraffes are the best ~  Anne Chow
+# Giraffes are the best ~ Anne Chow
 """ cuda = True if torch.cuda.is_available() else False
     
 Tensor = torch.cuda.FloatTensor if cuda else torch.FloatTensor    
@@ -26,7 +23,6 @@ if torch.cuda.is_available():
 
 # Load Data
 # Helper Music_Data Class
-# Correct values in Acousticness, Valence, Energy, Danceability, Loudness, Tempo
 class Music_Data:
     """Music data set"""
     def __init__(self, path):
@@ -65,20 +61,34 @@ class Music_Data:
         
 class LSTM_RNN(nn.Module):
 
-    def __init__(self, embedding_dim, hidden_dim, vocab_size, label_size):
+    def __init__(self, input_dim=6, hidden_dim=51):
         super(LSTM_RNN, self).__init__()
         self.hidden_dim = hidden_dim
-        self.word_embeddings = nn.Embedding(vocab_size, embedding_dim)
-        self.lstm = nn.LSTM(embedding_dim, hidden_dim)
-        self.hidden2label = nn.Linear(hidden_dim, label_size)
-        self.hidden = self.init_hidden()
-    def init_hidden(self):
-        # the first is the hidden h
-        # the second is the cell  c
-        return (autograd.Variable(torch.zeros(1, 1, self.hidden_dim)),
-                autograd.Variable(torch.zeros(1, 1, self.hidden_dim)))
+        # self.word_embeddings = nn.Embedding(vocab_size, embedding_dim)
+        self.lstm1 = nn.LSTMCell(1, self.hidden_dim) # embedding_dim = 1
+        self.lstm2 = nn.LSTMCell(self.hidden_dim, self.hidden_dim)
+        self.linear = nn.Linear(self.hidden_dim, 1)
+        # self.hidden2label = nn.Linear(hidden_dim, label_size)
+        # self.hidden = self.init_hidden()    
 
-    def forward(self, song):
+    def forward(self, x):
+        outputs = []
+        n_samples = x.size(0)
+
+        h_t = torch.zeros(n_samples, self.n_hidden, dtype=torch.float32)
+        c_t = torch.zeros(n_samples, self.n_hidden, dtype=torch.float32)
+        h_t2 = torch.zeros(n_samples, self.n_hidden, dtype=torch.float32)
+        c_t2 = torch.zeros(n_samples, self.n_hidden, dtype=torch.float32)
+
+        for input_t in x.split(1, dim=1):
+            h_t, c_t = self.lstm1(input_t, (h_t,c_t))
+            h_t2, c_t2 = self.lstm1(h_t, (h_t,c_t))
+            output = self.linear(h_t2)
+            outputs.append(output)
+
+        outputs = torch.cat(outputs, dim=1)
+        return outputs
+        
         embeds = self.word_embeddings(song)
         x = embeds.view(len(song), 1, -1)
         lstm_out, self.hidden = self.lstm(x, self.hidden)
