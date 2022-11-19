@@ -5,20 +5,19 @@ import random
 
 import pandas as pd
 import torch
-import torch.nn.functional as F
-from torch import autograd, nn, optim
+import torchvision
+import torchvision.transforms as transforms
 
-torch.manual_seed(1)
-random.seed(1)
+# check device configuration
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-# Giraffes are the best ~ Anne Chow
-""" cuda = True if torch.cuda.is_available() else False
-    
-Tensor = torch.cuda.FloatTensor if cuda else torch.FloatTensor    
-
-torch.manual_seed(125)
-if torch.cuda.is_available():
-    torch.cuda.manual_seed_all(125) """
+# define hyperparameters
+input_size = 9
+hidden_size = 500
+num_classes = 5
+num_epochs = 5
+batch_size = 100
+learning_rate = 0.0001
 
 
 # Load Data
@@ -58,43 +57,26 @@ class Music_Data:
         feature_data = feature_data.astype(float)
         return feature_data
 
-        
-class LSTM_RNN(nn.Module):
 
-    def __init__(self, input_dim=6, hidden_dim=51):
-        super(LSTM_RNN, self).__init__()
-        self.hidden_dim = hidden_dim
-        # self.word_embeddings = nn.Embedding(vocab_size, embedding_dim)
-        self.lstm1 = nn.LSTMCell(1, self.hidden_dim) # embedding_dim = 1
-        self.lstm2 = nn.LSTMCell(self.hidden_dim, self.hidden_dim)
-        self.linear = nn.Linear(self.hidden_dim, 1)
-        # self.hidden2label = nn.Linear(hidden_dim, label_size)
-        # self.hidden = self.init_hidden()    
-
+# fully connected neural network
+class fcn(nn.Module):
+    def __init__(self, input_size, hidden_size, num_classes):
+        super(fcn, self).__init__()
+        self.fc1 = nn.Linear(input_size, hidden_size)
+        self.relu = nn.ReLU()
+        self.fc2 = nn.Linear(hidden_size, num_classes)
+    
     def forward(self, x):
-        outputs = []
-        n_samples = x.size(0)
+        out = self.fc1(x)
+        out = self.relu(out)
+        out = self.fc2(out)
+        return out
 
-        h_t = torch.zeros(n_samples, self.n_hidden, dtype=torch.float32)
-        c_t = torch.zeros(n_samples, self.n_hidden, dtype=torch.float32)
-        h_t2 = torch.zeros(n_samples, self.n_hidden, dtype=torch.float32)
-        c_t2 = torch.zeros(n_samples, self.n_hidden, dtype=torch.float32)
+model = fcn(input_size, hidden_size, num_classes).to(device)
 
-        for input_t in x.split(1, dim=1):
-            h_t, c_t = self.lstm1(input_t, (h_t,c_t))
-            h_t2, c_t2 = self.lstm1(h_t, (h_t,c_t))
-            output = self.linear(h_t2)
-            outputs.append(output)
-
-        outputs = torch.cat(outputs, dim=1)
-        return outputs
-        
-        embeds = self.word_embeddings(song)
-        x = embeds.view(len(song), 1, -1)
-        lstm_out, self.hidden = self.lstm(x, self.hidden)
-        y  = self.hidden2label(lstm_out[-1])
-        log_probs = F.log_softmax(y)
-        return log_probs
+# Loss and optimizer
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)  
         
 
 def get_accuracy(truth, pred):
