@@ -5,6 +5,7 @@ import random
 
 import pandas as pd
 import torch
+import torch.nn as nn
 import torchvision
 import torchvision.transforms as transforms
 
@@ -87,35 +88,6 @@ def get_accuracy(truth, pred):
             right += 1.0
     return right/len(truth)
 
-def train():
-    train_data, dev_data, test_data, word_to_ix, label_to_ix = feature_data.load_MR_data()
-    EMBEDDING_DIM = 50
-    HIDDEN_DIM = 50
-    EPOCH = 100
-    best_dev_acc = 0.0
-    model = LSTM_RNN(embedding_dim=EMBEDDING_DIM,hidden_dim=HIDDEN_DIM,
-                           vocab_size=len(word_to_ix),label_size=len(label_to_ix))
-    loss_function = nn.NLLLoss()
-    optimizer = optim.Adam(model.parameters(),lr = 1e-3)
-
-    no_up = 0
-    for i in range(EPOCH): 
-        random.shuffle(train_data)
-        print('epoch: %d start!' % i)
-        train_epoch(model, train_data, loss_function, optimizer, word_to_ix, label_to_ix, i)
-        print('now best dev acc:',best_dev_acc)
-        dev_acc = evaluate(model,dev_data,loss_function,word_to_ix,label_to_ix,'dev')
-        test_acc = evaluate(model, test_data, loss_function, word_to_ix, label_to_ix, 'test')
-        if dev_acc > best_dev_acc:
-            best_dev_acc = dev_acc
-            os.system('rm mr_best_model_acc_*.model')
-            print('New Best Dev!!!')
-            torch.save(model.state_dict(), 'best_models/mr_best_model_acc_' + str(int(test_acc*10000)) + '.model')
-            no_up = 0
-        else:
-            no_up += 1
-            if no_up >= 10:
-                exit()
 
 
 if __name__ == "__main__": 
