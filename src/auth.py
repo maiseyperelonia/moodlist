@@ -60,6 +60,7 @@ def print_playlists(sp):
 def get_playlists(path):
     filenames = os.listdir(path)
     file_num = 0
+    counter = 0
     for filename in sorted(filenames):
         if filename.startswith("mpd.slice.") and filename.endswith(".json"):
             fullpath = os.sep.join((path, filename))
@@ -72,6 +73,13 @@ def get_playlists(path):
             label_js = label_f.read()
             label_f.close()
             label_info = json.loads(label_js)
+            # if(counter > 27000):
+            #     print("starting sleep")
+            #     time.sleep(30)
+            #     print("done sleeping")
+            #     counter = 0
+            # counter += 1000
+            # print(counter)
 
             for playlist in mpd_slice["playlists"]:
                 for label in label_info["Labels"]:
@@ -81,14 +89,18 @@ def get_playlists(path):
                         
                         if (pName.find(keyword) != -1):
                             if (label == "Love"):
-                                insert_songs(label, playlist, file_num)
-                                #print(pName," -- ", label)
-                            #print_playlist(playlist)
+                                #insert_songs(label, playlist, file_num)
+                                if(pName != "spain" and pName != "spain " and pName != "Ambassadors"):
+                                    print(pName," -- ", label)
+                                counter += 1
+                                #print_playlist(playlist)
                     file_num += 1
+    print(counter)
 
 def insert_songs(label, playlist, file_num):
     song_cnt = 0
     total_song_cnt = 0
+
     for track in playlist["tracks"]:
         track_id = track["track_uri"][14:]
         track_info = get_song_info(track_id).json()
@@ -219,7 +231,11 @@ def split_data():
 if __name__ == "__main__":
     path = "../SpotifyDataset/data"
     auth = spotify_auth()
+<<<<<<< HEAD
     #get_playlists(path)
+=======
+    get_playlists(path)
+>>>>>>> 2962442 (changed keywords)
     #visualize_data()
     #print_playlists(auth)
     #write_csv()
