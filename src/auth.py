@@ -231,6 +231,6 @@ if __name__ == "__main__":
     #visualize_data()
     #print_playlists(auth)
     #write_csv()
-    split_data()
+    #split_data()
     #normalize_data()
     #process_playlists(path)

@@ -68,6 +68,7 @@ class fcn(nn.Module):
         self.fc2 = nn.Linear(hidden_size, num_classes)
     
     def forward(self, x):
+        x = x.view(-1, 6 * 1) # Flattens input to n x 6 x 1
         out = self.fc1(x)
         out = self.relu(out)
         out = self.fc2(out)
