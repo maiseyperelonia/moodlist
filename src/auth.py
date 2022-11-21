@@ -11,7 +11,7 @@ import json
 import pandas as pd
 import matplotlib.pyplot as plt
 import plotly as px
-#import splitfolders
+import splitfolders
 import requests
 
 def get_spotify_token():
@@ -221,24 +221,16 @@ def normalize_data():
 
 
 def split_data():
-    directory = "../feature_data/"
-    #splitfolders.ratio(directory, output='input_data', seed=1337, ratio=(0.6, 0.2,0.2)) 
-<<<<<<< HEAD
-            
-=======
+    directory = "../feature_data_compressed/feature_data/"
+    splitfolders.ratio(directory, output='input_data', seed=1337, ratio=(0.6, 0.2,0.2)) 
 
->>>>>>> 918937c (commiting to pull)
 if __name__ == "__main__":
     path = "../SpotifyDataset/data"
     auth = spotify_auth()
-<<<<<<< HEAD
     #get_playlists(path)
-=======
-    get_playlists(path)
->>>>>>> 2962442 (changed keywords)
     #visualize_data()
     #print_playlists(auth)
     #write_csv()
-    #split_data()
+    split_data()
     #normalize_data()
     #process_playlists(path)
