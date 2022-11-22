@@ -202,7 +202,7 @@ def visualize_data():
     print(all_labels)
 
 def normalize_data():
-    directory = "../feature_data/"
+    directory = "input_data/test/"
 
     #for name in directory:
 
@@ -210,13 +210,13 @@ def normalize_data():
     for label_folder in os.listdir(directory):
         label_folder = label_folder + "/"
         for filename in os.listdir(directory+label_folder):
-            if label_folder == "Love/":
-                df = pd.read_csv(directory+label_folder+filename)
-                df[['loudness','tempo']] = (df[['loudness','tempo']] - df[['loudness','tempo']].min())/(df[['loudness','tempo']].max() - df[['loudness','tempo']].min())
-        
-                df.loc['loudness'] = df['loudness']
-                df.loc['tempo'] = df['tempo']
-                df.to_csv(directory+label_folder+filename, index = False)
+            #if label_folder == "Love/":
+            df = pd.read_csv(directory+label_folder+filename)
+            df[['loudness','tempo']] = (df[['loudness','tempo']] - df[['loudness','tempo']].min())/(df[['loudness','tempo']].max() - df[['loudness','tempo']].min())
+    
+            df.loc['loudness'] = df['loudness']
+            df.loc['tempo'] = df['tempo']
+            df.to_csv(directory+label_folder+filename, index = False)
 
 
 
@@ -231,6 +231,6 @@ if __name__ == "__main__":
     #visualize_data()
     #print_playlists(auth)
     #write_csv()
-    #split_data()
+    split_data()
     #normalize_data()
     #process_playlists(path)

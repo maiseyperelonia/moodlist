@@ -15,10 +15,14 @@ import torchvision.transforms as transforms
 # check device configuration
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
+music_train = []
+music_test = []
+music_val = []
 # Load Data
 # Helper Music_Data Class
 class Music_Data:
     """Music data set"""
+
     def __init__(self, path):
         """Music data set"""
         print(path)
@@ -39,7 +43,7 @@ class Music_Data:
                     for row in reader:
                         if row[0] == 'danceability':
                             continue
-                        col_idx = [0,1,3,6,9,10]
+                        col_idx = [0,1,6,9]
                         temp_row = []
                         for col in col_idx:
                             if(row[col] == "{'status': 401, 'message': 'The access token expired'}"):
@@ -55,6 +59,12 @@ class Music_Data:
         # print(data_orig)
         # converts input data into a tensor
         self.data = list(data_orig)
+    
+    def __len__(self):
+        return len(self.data)
+    
+    def __getitem__(self, idx):
+        return self.data[idx]
         # self.data = torch.Tensor(data_orig)
         #print(self.data)
         # self.keep_columns([0, 1, 3, 6, 9, 10, 18])
@@ -78,35 +88,36 @@ class fcn(nn.Module):
         self.fc2 = nn.Linear(hidden_size, num_classes)
     
     def forward(self, x):
-        x = x.view(-1, 6 * 1) # Flattens input to n x 6 x 1
+        x = x.view(-1, 4 * 1) # Flattens input to n x 6 x 1
         out = self.fc1(x)
         out = self.relu(out)
         out = self.fc2(out)
         return out
 
-def get_accuracy(truth, pred):
-    assert len(truth)==len(pred)
-    right = 0
-    for i in range(len(truth)):
-        if truth[i]==pred[i]:
-            right += 1.0
-    return right/len(truth)
+# def get_accuracy(truth, pred):
+#     assert len(truth)==len(pred)
+#     right = 0
+#     for i in range(len(truth)):
+#         if truth[i]==pred[i]:
+#             right += 1.0
+#     return right/len(truth)
 
-# def get_accuracy(model, train=False):
-#     if train:
-#         data = mnist_train
-#     else:
-#         data = mnist_val
+def get_accuracy(model, train=False):
+    if train:
+        data = music_train
+    else:
+        data = music_val
 
-#     correct = 0
-#     total = 0
-#     for imgs, labels in torch.utils.data.DataLoader(data, batch_size=64):
-#         output = model(imgs)
-#         # select index with maximum prediction score
-#         pred = output.max(1, keepdim=True)[1]
-#         correct += pred.eq(labels.view_as(pred)).sum().item()
-#         total += imgs.shape[0]
-#     return correct / total
+    correct = 0
+    total = 0
+    for features in torch.utils.data.DataLoader(data, batch_size=64):
+        labels = features[4]
+        output = model(features[:4])
+        # select index with maximum prediction score
+        pred = output.max(1, keepdim=True)[1]
+        correct += pred.eq(labels.view_as(pred)).sum().item()
+        total += features[:4].shape[0]
+    return correct / total
 
 def train(model, data, batch_size=64, num_epochs=1 , print_stat = 1):
     train_loader = torch.utils.data.DataLoader(data, batch_size=batch_size)
@@ -114,12 +125,21 @@ def train(model, data, batch_size=64, num_epochs=1 , print_stat = 1):
     optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
 
     iters, losses, train_acc, val_acc = [], [], [], []
-
+    # print("The dataLoader:")
+    # train_labels = next(iter(train_loader))
+    #print(train_labels[0])
     # training
     n = 0 # the number of iterations
     for epoch in range(num_epochs):
-        for imgs, labels in iter(train_loader):
-            out = model(imgs)             # forward pass
+        for songs in iter(train_loader):
+            for features in songs:
+                print("Whole tensor:")
+                print(features)
+                print("4-part tensor:")
+                print(features[:4])
+                break
+            labels = features[4]
+            out = model(torch.tensor(features[:4]))             # forward pass
             loss = criterion(out, labels) # compute the total loss
             loss.backward()               # backward pass (compute parameter updates)
             optimizer.step()              # make the updates for each parameter
@@ -162,6 +182,9 @@ if __name__ == "__main__":
     moods = ['Angry', 'Calm', 'Happy', 'Love', 'Sad']
 
     # print(train_data)
+    music_train = train_data
+    music_val = val_data
+
     # define hyperparameters
     input_size = 9
     hidden_size = 500
@@ -170,5 +193,5 @@ if __name__ == "__main__":
     batch_size = 100
     learning_rate = 0.0001
 
-
     model = fcn(input_size, hidden_size, num_classes)
+    train(model, train_data)
