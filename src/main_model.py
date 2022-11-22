@@ -58,7 +58,7 @@ class Music_Data:
 
         # print(data_orig)
         # converts input data into a tensor
-        self.data = list(data_orig)
+        self.data = torch.tensor(data_orig)
     
     def __len__(self):
         return len(self.data)
@@ -88,11 +88,11 @@ class fcn(nn.Module):
         self.fc2 = nn.Linear(hidden_size, num_classes)
     
     def forward(self, x):
-        x = x.view(-1, 4 * 1) # Flattens input to n x 6 x 1
-        out = self.fc1(x)
-        out = self.relu(out)
-        out = self.fc2(out)
-        return out
+        #x = x.view(-1, 4 * 1) # Flattens input to n x 4 x 1
+        out1 = self.fc1(x)
+        out2 = self.relu(out1)
+        out3 = self.fc2(out2)
+        return out3
 
 # def get_accuracy(truth, pred):
 #     assert len(truth)==len(pred)
@@ -137,20 +137,22 @@ def train(model, data, batch_size=64, num_epochs=1 , print_stat = 1):
                 print(features)
                 print("4-part tensor:")
                 print(features[:4])
-                break
-            labels = features[4]
-            out = model(torch.tensor(features[:4]))             # forward pass
-            loss = criterion(out, labels) # compute the total loss
-            loss.backward()               # backward pass (compute parameter updates)
-            optimizer.step()              # make the updates for each parameter
-            optimizer.zero_grad()         # a clean up step for PyTorch
+            
+                labels = features[4]
+                out = model(features[:4])            # forward pass
+                print("Outcome:")
+                print(out)
+                loss = criterion(out, labels) # compute the total loss
+                loss.backward()               # backward pass (compute parameter updates)
+                optimizer.step()              # make the updates for each parameter
+                optimizer.zero_grad()         # a clean up step for PyTorch
 
-            # save the current training information
-            iters.append(n)
-            losses.append(float(loss)/batch_size)             # compute *average* loss
-            train_acc.append(get_accuracy(model, train=True)) # compute training accuracy 
-            val_acc.append(get_accuracy(model, train=False))  # compute validation accuracy
-            n += 1
+                # save the current training information
+                iters.append(n)
+                losses.append(float(loss)/batch_size)             # compute *average* loss
+                train_acc.append(get_accuracy(model, train=True)) # compute training accuracy 
+                val_acc.append(get_accuracy(model, train=False))  # compute validation accuracy
+                n += 1
 
     if print_stat:
       # plotting
@@ -186,11 +188,11 @@ if __name__ == "__main__":
     music_val = val_data
 
     # define hyperparameters
-    input_size = 9
+    input_size = 4
     hidden_size = 500
     num_classes = 5
     num_epochs = 5
-    batch_size = 100
+    batch_size = 64
     learning_rate = 0.0001
 
     model = fcn(input_size, hidden_size, num_classes)
