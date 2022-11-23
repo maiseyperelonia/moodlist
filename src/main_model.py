@@ -94,6 +94,7 @@ class fcn(nn.Module):
         out3 = self.fc2(out2)
         return out3
 
+# 
 # def get_accuracy(truth, pred):
 #     assert len(truth)==len(pred)
 #     right = 0
