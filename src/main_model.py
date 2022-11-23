@@ -19,6 +19,9 @@ music_train = []
 music_test = []
 music_val = []
 # Load Data
+
+torch.manual_seed(0)
+np.random.seed(0)
 # Helper Music_Data Class
 class Music_Data:
     """Music data set"""
@@ -28,6 +31,7 @@ class Music_Data:
         print(path)
         train_path = ['Angry', 'Calm', 'Happy', 'Love', 'Sad']
         data_orig = []
+        label_val = []
         num = -1
         # loop over the list of .csv files
         for word in train_path:
@@ -40,41 +44,54 @@ class Music_Data:
                 with open(file) as fd:
                     reader = csv.reader(fd, delimiter=',')
                     count = 0
+                    temp_row = np.empty([9, 4])
                     for row in reader:
                         if row[0] == 'danceability':
                             continue
                         col_idx = [0,1,6,9]
-                        temp_row = []
+                        temp = []
                         for col in col_idx:
                             if(row[col] == "{'status': 401, 'message': 'The access token expired'}"):
                                 print(file)
-
-                            temp_row.append(float(row[col]))
-
-                        temp_row.append(num)
-                        if count > 0 and row[0] != '':
-                            data_orig.append(temp_row)
-                        count += 1
+                            temp.append(row[col])
+                        np.append(temp_row, temp)
+                    temp_row.flatten()
                     
+                    data_orig.append(temp_row)
+                    label_val.append(num)
 
+        data_orig = np.array(data_orig)
+        print(data_orig)
+        label_val = np.array(label_val)
+
+        self.feat_data = torch.tensor(data_orig,
+                            dtype=torch.float32).to(device)
+        self.label_data = torch.tensor(label_val,
+                            dtype=torch.float32).to(device)          
         # print(data_orig)
+        print("feature data: " , self.feat_data)
+        print("label data: ", self.label_data)
+        print("shape of features:" ,self.feat_data.shape)
         # converts input data into a tensor
-        self.data = torch.tensor(data_orig)
+        # self.data = torch.tensor(data_orig)
     
     def __len__(self):
-        return len(self.data)
+        return len(self.feat_data)
     
     def __getitem__(self, idx):
-        return self.data[idx]
-        # self.data = torch.Tensor(data_orig)
-        #print(self.data)
-        # self.keep_columns([0, 1, 3, 6, 9, 10, 18])
+        if torch.is_tensor(idx):
+            idx = idx.tolist()
+        preds = self.feat_data[idx, 0:4]
+        pol = self.label_data[idx]
+        sample = \
+            { 'predictors' : preds, 'political' : pol }
+        return sample
         
-    def keep_columns(self, L):
-        """Select Features """           
-        feature_data = self.data[:,L]
-        feature_data = feature_data.astype(float)
-        return feature_data
+    # def keep_columns(self, L):
+    #     """Select Features """           
+    #     feature_data = self.feat_data[:,L]
+    #     feature_data = feature_data.astype(float)
+    #     return feature_data
 
 def readFiles():
     files = glob.glob("./input_data/train/Angry/*")
@@ -89,6 +106,7 @@ class fcn(nn.Module):
         self.fc2 = nn.Linear(hidden_size, num_classes)
     
     def forward(self, x):
+        print('x_shape:',x.shape)
         x = x.view(-1, 4 * 1) # Flattens input to n x 6 x 1
         out = self.fc1(x)
         out = self.relu(out)
@@ -139,20 +157,20 @@ def train(model, data, batch_size=64, num_epochs=1 , print_stat = 1):
                 print(features)
                 print("4-part tensor:")
                 print(features[:4])
-                break
-            labels = features[4]
-            out = model(torch.tensor(features[:4]))             # forward pass
-            loss = criterion(out, labels) # compute the total loss
-            loss.backward()               # backward pass (compute parameter updates)
-            optimizer.step()              # make the updates for each parameter
-            optimizer.zero_grad()         # a clean up step for PyTorch
+                
+                labels = features[4]
+                out = model(torch.tensor(features[:4]))             # forward pass
+                loss = criterion(out, labels) # compute the total loss
+                loss.backward()               # backward pass (compute parameter updates)
+                optimizer.step()              # make the updates for each parameter
+                optimizer.zero_grad()         # a clean up step for PyTorch
 
-            # save the current training information
-            iters.append(n)
-            losses.append(float(loss)/batch_size)             # compute *average* loss
-            train_acc.append(get_accuracy(model, train=True)) # compute training accuracy 
-            val_acc.append(get_accuracy(model, train=False))  # compute validation accuracy
-            n += 1
+                # save the current training information
+                iters.append(n)
+                losses.append(float(loss)/batch_size)             # compute *average* loss
+                train_acc.append(get_accuracy(model, train=True)) # compute training accuracy 
+                val_acc.append(get_accuracy(model, train=False))  # compute validation accuracy
+                n += 1
 
     if print_stat:
       # plotting
