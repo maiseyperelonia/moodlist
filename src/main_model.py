@@ -129,19 +129,19 @@ class fcn(nn.Module):
         super(fcn, self).__init__()
         self.fc1 = nn.Linear(input_size, hidden_size)
         self.relu = nn.ReLU()
-        # self.fc2 = nn.Linear(233, 709)
         # self.fc2 = nn.Linear(233, hidden_size)
-        self.fc4 = nn.Linear(hidden_size, 59)
-        self.fc5 = nn.Linear(59, num_classes)
+        # self.fc2 = nn.Linear(233, hidden_size)
+        self.fc4 = nn.Linear(hidden_size, 23)
+        self.fc5 = nn.Linear(23, num_classes)
     
     def forward(self, x):
-        # x = x.view(-1, 36 * 1) # Flattens input to n x 6 x 1
+        x = x.view(-1, input_size) # Flattens input to n x 6 x 1
         # print(x.shape)
-        out = F.relu(self.fc1(x))
+        out = F.dropout(F.relu(self.fc1(x)), 0.2)
         # out = self.relu(out)
-        # out = F.relu(self.fc2(out))
+        # out = F.dropout(F.relu(self.fc2(out)), 0.2)
         # out = F.relu(self.fc3(out))
-        out = F.relu(self.fc4(out))
+        out = F.dropout(F.relu(self.fc4(out)), 0.2)
         # out = self.relu(out)
         out = self.fc5(out)
         return out
@@ -189,6 +189,7 @@ def train(model, data, batch_size=64, num_epochs=10 , print_stat = 1, lr= 0.001)
         total_train_loss = 0.0
         total_train_err = 0.0
         total_epoch = 0
+        best_loss = 0
         for songs, labels in iter(train_loader):
             # songs = songs.view(-1, 4 * 9)
             # print("song shape: ",songs.shape)
@@ -198,17 +199,19 @@ def train(model, data, batch_size=64, num_epochs=10 , print_stat = 1, lr= 0.001)
             loss = criterion(out, labels.long()) # compute the total loss
             loss.backward()               # backward pass (compute parameter updates)
             optimizer.step()              # make the updates for each parameter
+
             optimizer.zero_grad()         # a clean up step for PyTorch
             
+            iters.append(n)
+            losses.append(float(loss)/batch_size)             # compute *average* loss
+            train_acc.append(get_accuracy(model, train=True)) # compute training accuracy 
+            val_acc.append(get_accuracy(model, train=False))  # compute validation accuracy
             # corr = (out > 0.0).long() != labels.long()
             # total_train_err += int(corr.sum())
             # total_train_loss += loss.item()
             total_epoch += len(labels)
             # save the current training information
-            iters.append(n)
-            losses.append(float(loss)/batch_size)             # compute *average* loss
-            train_acc.append(get_accuracy(model, train=True)) # compute training accuracy 
-            val_acc.append(get_accuracy(model, train=False))  # compute validation accuracy
+            
             n += 1
 
         # train_err[epoch] = float(total_train_err) / total_epoch
@@ -250,11 +253,11 @@ if __name__ == "__main__":
 
     # define hyperparameters
     input_size = 36
-    hidden_size = 233
+    hidden_size = 433
     num_classes = 5
     num_epochs = 30
     batch_size = 64
-    learning_rate = 0.001
+    learning_rate = 0.01
     print("lr: ", learning_rate, "batch_size: ", batch_size, "num_epochs: ", num_epochs)
 
     model = fcn(input_size, hidden_size, num_classes)
