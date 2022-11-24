@@ -11,6 +11,9 @@ import torch
 import torch.nn as nn
 import torchvision
 import torchvision.transforms as transforms
+import torch.nn.functional as F
+from sklearn.utils import shuffle
+
 
 # check device configuration
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -43,9 +46,11 @@ class Music_Data:
                 df = pd.read_csv(file)
                 with open(file) as fd:
                     reader = csv.reader(fd, delimiter=',')
-                    count = 0
-                    temp_row = np.empty([9, 4])
+                    temp_row = []
+                    row_cnt = 0
                     for row in reader:
+                        if( row_cnt == 9):
+                            break
                         if row[0] == 'danceability':
                             continue
                         col_idx = [0,1,6,9]
@@ -53,39 +58,60 @@ class Music_Data:
                         for col in col_idx:
                             if(row[col] == "{'status': 401, 'message': 'The access token expired'}"):
                                 print(file)
-                            temp.append(row[col])
-                        np.append(temp_row, temp)
-                    temp_row.flatten()
-                    
-                    data_orig.append(temp_row)
+                            
+                            temp.append(float(row[col]))
+                        temp_row.append(temp)
+                        row_cnt += 1
+                        # np.append(temp_row, temp)
+                    # temp_row = np.array(temp_row)
+                    if(row_cnt < 9):
+                        while(9 - row_cnt != 0):
+                            temp_row.append([0,0,0,0])
+                            row_cnt += 1
+                            
+                    tensor_row = torch.tensor(temp_row)
+                    # print("old tensor: ", tensor_row)
+                    tensor_row = tensor_row.view(-1,4*9)
+                    # print("new tensor: ", tensor_row)
+                    # print("tensor as list ", tensor_row.tolist()[0])
+                    data_orig.append(tensor_row.tolist()[0])
                     label_val.append(num)
 
-        data_orig = np.array(data_orig)
-        print(data_orig)
-        label_val = np.array(label_val)
-
-        self.feat_data = torch.tensor(data_orig,
+        # data_orig = np.array(data_orig)
+        # print(data_orig)
+        # label_val = np.array(label_val)
+        p = np.random.permutation(len(data_orig))
+        data_orig = np.array(data_orig)[p]
+        label_val = np.array(label_val)[p]
+                    
+        self.feat_data = torch.tensor(data_orig.tolist(),
                             dtype=torch.float32).to(device)
-        self.label_data = torch.tensor(label_val,
+        self.label_data = torch.tensor(label_val.tolist(),
                             dtype=torch.float32).to(device)          
         # print(data_orig)
-        print("feature data: " , self.feat_data)
-        print("label data: ", self.label_data)
-        print("shape of features:" ,self.feat_data.shape)
+        # print("feature data: " , self.feat_data)
+        # self.feat_data = torch.flatten(self.feat_data, start_dim=4, end_dim=9)
+
+        print(self.feat_data.shape)
+        # for i in feat_data:
+        #     self.feat_data = i.view(-1, 4*9)
+        #     print(i)
+        #     print("shape flattened:", i.shape)
+        # print("label data: ", self.label_data)
+        #print("shape of features:" ,self.feat_data.shape)
         # converts input data into a tensor
         # self.data = torch.tensor(data_orig)
-    
+
     def __len__(self):
         return len(self.feat_data)
     
     def __getitem__(self, idx):
         if torch.is_tensor(idx):
             idx = idx.tolist()
-        preds = self.feat_data[idx, 0:4]
-        pol = self.label_data[idx]
-        sample = \
-            { 'predictors' : preds, 'political' : pol }
-        return sample
+        preds = self.feat_data
+        pol = self.label_data
+        
+        return self.feat_data[idx], self.label_data[idx]
         
     # def keep_columns(self, L):
     #     """Select Features """           
@@ -103,14 +129,21 @@ class fcn(nn.Module):
         super(fcn, self).__init__()
         self.fc1 = nn.Linear(input_size, hidden_size)
         self.relu = nn.ReLU()
-        self.fc2 = nn.Linear(hidden_size, num_classes)
+        # self.fc2 = nn.Linear(233, 709)
+        # self.fc2 = nn.Linear(233, hidden_size)
+        self.fc4 = nn.Linear(hidden_size, 59)
+        self.fc5 = nn.Linear(59, num_classes)
     
     def forward(self, x):
-        print('x_shape:',x.shape)
-        x = x.view(-1, 4 * 1) # Flattens input to n x 6 x 1
-        out = self.fc1(x)
-        out = self.relu(out)
-        out = self.fc2(out)
+        # x = x.view(-1, 36 * 1) # Flattens input to n x 6 x 1
+        # print(x.shape)
+        out = F.relu(self.fc1(x))
+        # out = self.relu(out)
+        # out = F.relu(self.fc2(out))
+        # out = F.relu(self.fc3(out))
+        out = F.relu(self.fc4(out))
+        # out = self.relu(out)
+        out = self.fc5(out)
         return out
 
 # 
@@ -122,7 +155,7 @@ class fcn(nn.Module):
 #             right += 1.0
 #     return right/len(truth)
 
-def get_accuracy(model, train=False):
+def get_accuracy(model, train=False, batch_size=64):
     if train:
         data = music_train
     else:
@@ -130,19 +163,19 @@ def get_accuracy(model, train=False):
 
     correct = 0
     total = 0
-    for features in torch.utils.data.DataLoader(data, batch_size=64):
-        labels = features[4]
-        output = model(features[:4])
+    for features, labels in torch.utils.data.DataLoader(data, batch_size=batch_size):
+        output = model(features)
         # select index with maximum prediction score
         pred = output.max(1, keepdim=True)[1]
         correct += pred.eq(labels.view_as(pred)).sum().item()
-        total += features[:4].shape[0]
+        total += features.shape[0]
     return correct / total
 
-def train(model, data, batch_size=64, num_epochs=1 , print_stat = 1):
+def train(model, data, batch_size=64, num_epochs=10 , print_stat = 1, lr= 0.001):
     train_loader = torch.utils.data.DataLoader(data, batch_size=batch_size)
+    print("size after dataloader: ", train_loader.dataset.feat_data.shape, "label size: ", train_loader.dataset.label_data.shape)
     criterion = nn.CrossEntropyLoss() # loss function for multi class classification
-    optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
+    optimizer = optim.SGD(model.parameters(), lr, momentum=0.9)
 
     iters, losses, train_acc, val_acc = [], [], [], []
     # print("The dataLoader:")
@@ -150,28 +183,38 @@ def train(model, data, batch_size=64, num_epochs=1 , print_stat = 1):
     #print(train_labels[0])
     # training
     n = 0 # the number of iterations
+    train_err = np.zeros(num_epochs)
+    
     for epoch in range(num_epochs):
-        for songs in iter(train_loader):
-            for features in songs:
-                print("Whole tensor:")
-                print(features)
-                print("4-part tensor:")
-                print(features[:4])
-                
-                labels = features[4]
-                out = model(torch.tensor(features[:4]))             # forward pass
-                loss = criterion(out, labels) # compute the total loss
-                loss.backward()               # backward pass (compute parameter updates)
-                optimizer.step()              # make the updates for each parameter
-                optimizer.zero_grad()         # a clean up step for PyTorch
+        total_train_loss = 0.0
+        total_train_err = 0.0
+        total_epoch = 0
+        for songs, labels in iter(train_loader):
+            # songs = songs.view(-1, 4 * 9)
+            # print("song shape: ",songs.shape)
+            # print("label shape: ", labels.shape)
+            # print(songs)
+            out = model(songs)             # forward pass
+            loss = criterion(out, labels.long()) # compute the total loss
+            loss.backward()               # backward pass (compute parameter updates)
+            optimizer.step()              # make the updates for each parameter
+            optimizer.zero_grad()         # a clean up step for PyTorch
+            
+            # corr = (out > 0.0).long() != labels.long()
+            # total_train_err += int(corr.sum())
+            # total_train_loss += loss.item()
+            total_epoch += len(labels)
+            # save the current training information
+            iters.append(n)
+            losses.append(float(loss)/batch_size)             # compute *average* loss
+            train_acc.append(get_accuracy(model, train=True)) # compute training accuracy 
+            val_acc.append(get_accuracy(model, train=False))  # compute validation accuracy
+            n += 1
 
-                # save the current training information
-                iters.append(n)
-                losses.append(float(loss)/batch_size)             # compute *average* loss
-                train_acc.append(get_accuracy(model, train=True)) # compute training accuracy 
-                val_acc.append(get_accuracy(model, train=False))  # compute validation accuracy
-                n += 1
-
+        # train_err[epoch] = float(total_train_err) / total_epoch
+ 
+        print(("Epoch {}: train_acc: {} val_acc: {}").format(
+                   epoch + 1, train_acc[-1], val_acc[-1]))
     if print_stat:
       # plotting
       plt.title("Training Curve")
@@ -206,12 +249,13 @@ if __name__ == "__main__":
     music_val = val_data
 
     # define hyperparameters
-    input_size = 4
-    hidden_size = 500
+    input_size = 36
+    hidden_size = 233
     num_classes = 5
-    num_epochs = 5
+    num_epochs = 30
     batch_size = 64
-    learning_rate = 0.0001
+    learning_rate = 0.001
+    print("lr: ", learning_rate, "batch_size: ", batch_size, "num_epochs: ", num_epochs)
 
     model = fcn(input_size, hidden_size, num_classes)
-    train(model, train_data)
+    train(model, train_data, lr= learning_rate, num_epochs=num_epochs)
