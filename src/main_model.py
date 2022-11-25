@@ -155,11 +155,13 @@ class fcn(nn.Module):
 #             right += 1.0
 #     return right/len(truth)
 
-def get_accuracy(model, train=False, batch_size=64):
+def get_accuracy(model, train=False, val=False, batch_size=64):
     if train:
         data = music_train
-    else:
+    elif val:
         data = music_val
+    else:
+        data = music_test
 
     correct = 0
     total = 0
@@ -205,7 +207,7 @@ def train(model, data, batch_size=64, num_epochs=10 , print_stat = 1, lr= 0.001)
             iters.append(n)
             losses.append(float(loss)/batch_size)             # compute *average* loss
             train_acc.append(get_accuracy(model, train=True)) # compute training accuracy 
-            val_acc.append(get_accuracy(model, train=False))  # compute validation accuracy
+            val_acc.append(get_accuracy(model, train=False, val=True))  # compute validation accuracy
             # corr = (out > 0.0).long() != labels.long()
             # total_train_err += int(corr.sum())
             # total_train_loss += loss.item()
@@ -250,15 +252,28 @@ if __name__ == "__main__":
     # print(train_data)
     music_train = train_data
     music_val = val_data
+    music_test = test_data
 
     # define hyperparameters
     input_size = 36
     hidden_size = 433
     num_classes = 5
     num_epochs = 30
-    batch_size = 64
+    batch_size = 32
     learning_rate = 0.01
     print("lr: ", learning_rate, "batch_size: ", batch_size, "num_epochs: ", num_epochs)
 
     model = fcn(input_size, hidden_size, num_classes)
     train(model, train_data, lr= learning_rate, num_epochs=num_epochs)
+
+    print("Testing accuracy: ", get_accuracy(model, train=False, val=False))
+    # maisey's data for testing
+        # world burn 3iISGrl3JKqPQ4GLqPjVkt
+        # seventeen 2p0FjrYZlNhEejQOLXHP2n
+        # dead girl walking 5L5N8YOsBxdzR9h9sudBgG
+        # i'd rather be me 2UNt0aiJNNXbbtSN5Aag0x
+        # take me or leave me 0E1NL6gkv5aQKGNjJfBE3A
+        # i'm here 30q6kWgifW3DwuVydQQX3g
+        # you shine 5JgILRnXH4nSah9m4EU46M
+        # flowers 48PFfbnf0ZRcGCxO4zApPp
+        # stupid with love 2fB3nWTsj1Aba2oJsAiTck

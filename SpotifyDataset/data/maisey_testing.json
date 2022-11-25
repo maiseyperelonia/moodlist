@@ -1,0 +1,489 @@
+{
+    "collaborative": false,
+    "description": "",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/5dqGJJeu380mboMbB0IyRF"
+    },
+    "followers": {
+      "href": null,
+      "total": 0
+    },
+    "href": "https://api.spotify.com/v1/playlists/5dqGJJeu380mboMbB0IyRF",
+    "id": "5dqGJJeu380mboMbB0IyRF",
+    "name": "maisey_testing",
+    "owner": {
+      "display_name": "Maisey Perelonia",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/user/maisey6288"
+      },
+      "href": "https://api.spotify.com/v1/users/maisey6288",
+      "id": "maisey6288",
+      "type": "user",
+      "uri": "spotify:user:maisey6288"
+    },
+    "primary_color": null,
+    "public": false,
+    "snapshot_id": "MTEsM2MyODlmZmU4YWViNTExOGY0YTY0MmNkZmI1Njk5NTM2YWYzODUzYw==",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/5dqGJJeu380mboMbB0IyRF/tracks?offset=0&limit=100&locale=en-US,en;q=0.9",
+      "items": [
+        {
+          "added_at": "2022-11-25T03:20:51Z",
+          "added_by": {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/maisey6288"
+            },
+            "href": "https://api.spotify.com/v1/users/maisey6288",
+            "id": "maisey6288",
+            "type": "user",
+            "uri": "spotify:user:maisey6288"
+          },
+          "is_local": false,
+          "primary_color": null,
+          "track": {
+            "href": "https://api.spotify.com/v1/tracks/2fB3nWTsj1Aba2oJsAiTck",
+            "id": "2fB3nWTsj1Aba2oJsAiTck",
+            "is_local": false,
+            "name": "Stupid With Love",
+            "popularity": 47,
+            "preview_url": "https://p.scdn.co/mp3-preview/56c1857316e147b56994f781e71b74c749dc9097?cid=774b29d4f13844c495f206cafdad9c86",
+            "track": true,
+            "track_number": 5,
+            "type": "track",
+            "uri": "spotify:track:2fB3nWTsj1Aba2oJsAiTck"
+          }
+        },
+        {
+          "added_at": "2022-11-25T03:20:58Z",
+          "added_by": {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/maisey6288"
+            },
+            "href": "https://api.spotify.com/v1/users/maisey6288",
+            "id": "maisey6288",
+            "type": "user",
+            "uri": "spotify:user:maisey6288"
+          },
+          "is_local": false,
+          "primary_color": null,
+          "track": {
+            "album": {
+              "album_type": "album",
+              "external_urls": {
+                "spotify": "https://open.spotify.com/album/1J1yxODbNlqKbwRqJxYJUP"
+              },
+              "href": "https://api.spotify.com/v1/albums/1J1yxODbNlqKbwRqJxYJUP",
+              "id": "1J1yxODbNlqKbwRqJxYJUP",
+              "name": "Hadestown (Original Broadway Cast Recording)",
+              "release_date": "2019-07-26",
+              "release_date_precision": "day",
+              "total_tracks": 40,
+              "type": "album",
+              "uri": "spotify:album:1J1yxODbNlqKbwRqJxYJUP"
+            },
+            "disc_number": 1,
+            "duration_ms": 211038,
+            "episode": false,
+            "explicit": false,
+            "external_ids": {
+              "isrc": "USWB11901378"
+            },
+            "external_urls": {
+              "spotify": "https://open.spotify.com/track/48PFfbnf0ZRcGCxO4zApPp"
+            },
+            "href": "https://api.spotify.com/v1/tracks/48PFfbnf0ZRcGCxO4zApPp",
+            "id": "48PFfbnf0ZRcGCxO4zApPp",
+            "is_local": false,
+            "name": "Flowers",
+            "popularity": 48,
+            "preview_url": "https://p.scdn.co/mp3-preview/931c673ac168a1f74401f807150db2931067d85b?cid=774b29d4f13844c495f206cafdad9c86",
+            "track": true,
+            "track_number": 23,
+            "type": "track",
+            "uri": "spotify:track:48PFfbnf0ZRcGCxO4zApPp"
+          },
+          "video_thumbnail": {
+            "url": null
+          }
+        },
+        {
+          "added_at": "2022-11-25T03:21:03Z",
+          "added_by": {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/maisey6288"
+            },
+            "href": "https://api.spotify.com/v1/users/maisey6288",
+            "id": "maisey6288",
+            "type": "user",
+            "uri": "spotify:user:maisey6288"
+          },
+          "is_local": false,
+          "primary_color": null,
+          "track": {
+            "album": {
+              "album_type": "album",
+              "external_urls": {
+                "spotify": "https://open.spotify.com/album/52aa2YRiTqQ30m3of8IVuf"
+              },
+              "href": "https://api.spotify.com/v1/albums/52aa2YRiTqQ30m3of8IVuf",
+              "id": "52aa2YRiTqQ30m3of8IVuf",
+              "name": "Carrie: The Musical (Premiere Cast Recording)",
+              "release_date": "2012-09-25",
+              "release_date_precision": "day",
+              "total_tracks": 24,
+              "type": "album",
+              "uri": "spotify:album:52aa2YRiTqQ30m3of8IVuf"
+            },
+            "disc_number": 1,
+            "duration_ms": 202186,
+            "episode": false,
+            "explicit": false,
+            "external_ids": {
+              "isrc": "USSK31210320"
+            },
+            "external_urls": {
+              "spotify": "https://open.spotify.com/track/5JgILRnXH4nSah9m4EU46M"
+            },
+            "href": "https://api.spotify.com/v1/tracks/5JgILRnXH4nSah9m4EU46M",
+            "id": "5JgILRnXH4nSah9m4EU46M",
+            "is_local": false,
+            "name": "You Shine",
+            "popularity": 36,
+            "preview_url": "https://p.scdn.co/mp3-preview/bc1ba8d0f8b0314efcad785bef1336c0efb59573?cid=774b29d4f13844c495f206cafdad9c86",
+            "track": true,
+            "track_number": 13,
+            "type": "track",
+            "uri": "spotify:track:5JgILRnXH4nSah9m4EU46M"
+          },
+          "video_thumbnail": {
+            "url": null
+          }
+        },
+        {
+          "added_at": "2022-11-25T03:21:11Z",
+          "added_by": {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/maisey6288"
+            },
+            "href": "https://api.spotify.com/v1/users/maisey6288",
+            "id": "maisey6288",
+            "type": "user",
+            "uri": "spotify:user:maisey6288"
+          },
+          "is_local": false,
+          "primary_color": null,
+          "track": {
+            "album": {
+              "album_type": "compilation",
+              "external_urls": {
+                "spotify": "https://open.spotify.com/album/00buc4TyAb8lLoTx4PRDrP"
+              },
+              "href": "https://api.spotify.com/v1/albums/00buc4TyAb8lLoTx4PRDrP",
+              "id": "00buc4TyAb8lLoTx4PRDrP",
+              "name": "The Color Purple (2015 Broadway Cast Recording)",
+              "release_date": "2016-02-19",
+              "release_date_precision": "day",
+              "total_tracks": 26,
+              "type": "album",
+              "uri": "spotify:album:00buc4TyAb8lLoTx4PRDrP"
+            },
+            "disc_number": 1,
+            "duration_ms": 271986,
+            "episode": false,
+            "explicit": false,
+            "external_ids": {
+              "isrc": "QMQYB1605924"
+            },
+            "external_urls": {
+              "spotify": "https://open.spotify.com/track/30q6kWgifW3DwuVydQQX3g"
+            },
+            "href": "https://api.spotify.com/v1/tracks/30q6kWgifW3DwuVydQQX3g",
+            "id": "30q6kWgifW3DwuVydQQX3g",
+            "is_local": false,
+            "name": "I'm Here",
+            "popularity": 46,
+            "preview_url": "https://p.scdn.co/mp3-preview/defa2f66742ad8088b79ced17c77d6a63e12577d?cid=774b29d4f13844c495f206cafdad9c86",
+            "track": true,
+            "track_number": 24,
+            "type": "track",
+            "uri": "spotify:track:30q6kWgifW3DwuVydQQX3g"
+          },
+          "video_thumbnail": {
+            "url": null
+          }
+        },
+        {
+          "added_at": "2022-11-25T03:21:17Z",
+          "added_by": {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/maisey6288"
+            },
+            "href": "https://api.spotify.com/v1/users/maisey6288",
+            "id": "maisey6288",
+            "type": "user",
+            "uri": "spotify:user:maisey6288"
+          },
+          "is_local": false,
+          "primary_color": null,
+          "track": {
+            "album": {
+              "album_type": "compilation",
+              "external_urls": {
+                "spotify": "https://open.spotify.com/album/7JR7tGOAvqFSpVmDlCzHIJ"
+              },
+              "href": "https://api.spotify.com/v1/albums/7JR7tGOAvqFSpVmDlCzHIJ",
+              "id": "7JR7tGOAvqFSpVmDlCzHIJ",
+              "name": "RENT (Original Motion Picture Soundtrack)",
+              "release_date": "2005-09-27",
+              "release_date_precision": "day",
+              "total_tracks": 28,
+              "type": "album",
+              "uri": "spotify:album:7JR7tGOAvqFSpVmDlCzHIJ"
+            },
+            "disc_number": 1,
+            "duration_ms": 231360,
+            "episode": false,
+            "explicit": false,
+            "external_ids": {
+              "isrc": "USBYQ0500019"
+            },
+            "external_urls": {
+              "spotify": "https://open.spotify.com/track/0E1NL6gkv5aQKGNjJfBE3A"
+            },
+            "href": "https://api.spotify.com/v1/tracks/0E1NL6gkv5aQKGNjJfBE3A",
+            "id": "0E1NL6gkv5aQKGNjJfBE3A",
+            "is_local": false,
+            "name": "Take Me or Leave Me",
+            "popularity": 55,
+            "preview_url": "https://p.scdn.co/mp3-preview/746e1959141e00bcfd5077ee1152e14dc7fe94a2?cid=774b29d4f13844c495f206cafdad9c86",
+            "track": true,
+            "track_number": 19,
+            "type": "track",
+            "uri": "spotify:track:0E1NL6gkv5aQKGNjJfBE3A"
+          },
+          "video_thumbnail": {
+            "url": null
+          }
+        },
+        {
+          "added_at": "2022-11-25T03:21:23Z",
+          "added_by": {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/maisey6288"
+            },
+            "href": "https://api.spotify.com/v1/users/maisey6288",
+            "id": "maisey6288",
+            "type": "user",
+            "uri": "spotify:user:maisey6288"
+          },
+          "is_local": false,
+          "primary_color": null,
+          "track": {
+            "album": {
+              "album_type": "single",
+              "external_urls": {
+                "spotify": "https://open.spotify.com/album/0VcdcVK5S1CTyZ22KjrbGf"
+              },
+              "href": "https://api.spotify.com/v1/albums/0VcdcVK5S1CTyZ22KjrbGf",
+              "id": "0VcdcVK5S1CTyZ22KjrbGf",
+              "name": "I'd Rather Be Me",
+              "release_date": "2018-04-20",
+              "release_date_precision": "day",
+              "total_tracks": 1,
+              "type": "album",
+              "uri": "spotify:album:0VcdcVK5S1CTyZ22KjrbGf"
+            },
+            "disc_number": 1,
+            "duration_ms": 170639,
+            "episode": false,
+            "explicit": false,
+            "external_ids": {
+              "isrc": "USAT21801373"
+            },
+            "external_urls": {
+              "spotify": "https://open.spotify.com/track/2UNt0aiJNNXbbtSN5Aag0x"
+            },
+            "href": "https://api.spotify.com/v1/tracks/2UNt0aiJNNXbbtSN5Aag0x",
+            "id": "2UNt0aiJNNXbbtSN5Aag0x",
+            "is_local": false,
+            "name": "I'd Rather Be Me",
+            "popularity": 53,
+            "preview_url": "https://p.scdn.co/mp3-preview/e0df3bf128330c30e82eee4b5e6faa1833de1c50?cid=774b29d4f13844c495f206cafdad9c86",
+            "track": true,
+            "track_number": 1,
+            "type": "track",
+            "uri": "spotify:track:2UNt0aiJNNXbbtSN5Aag0x"
+          },
+          "video_thumbnail": {
+            "url": null
+          }
+        },
+        {
+          "added_at": "2022-11-25T03:21:28Z",
+          "added_by": {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/maisey6288"
+            },
+            "href": "https://api.spotify.com/v1/users/maisey6288",
+            "id": "maisey6288",
+            "type": "user",
+            "uri": "spotify:user:maisey6288"
+          },
+          "is_local": false,
+          "primary_color": null,
+          "track": {
+            "album": {
+              "album_type": "compilation",
+              "external_urls": {
+                "spotify": "https://open.spotify.com/album/6EIxlDI9fMtooJ1H3toRFO"
+              },
+              "href": "https://api.spotify.com/v1/albums/6EIxlDI9fMtooJ1H3toRFO",
+              "id": "6EIxlDI9fMtooJ1H3toRFO",
+              "name": "Heathers: The Musical (World Premiere Cast Recording)",
+              "release_date": "2014-06-10",
+              "release_date_precision": "day",
+              "total_tracks": 20,
+              "type": "album",
+              "uri": "spotify:album:6EIxlDI9fMtooJ1H3toRFO"
+            },
+            "disc_number": 1,
+            "duration_ms": 204613,
+            "episode": false,
+            "explicit": true,
+            "external_ids": {
+              "isrc": "US6W61422227"
+            },
+            "external_urls": {
+              "spotify": "https://open.spotify.com/track/5L5N8YOsBxdzR9h9sudBgG"
+            },
+            "href": "https://api.spotify.com/v1/tracks/5L5N8YOsBxdzR9h9sudBgG",
+            "id": "5L5N8YOsBxdzR9h9sudBgG",
+            "is_local": false,
+            "name": "Dead Girl Walking",
+            "popularity": 62,
+            "preview_url": "https://p.scdn.co/mp3-preview/e249ae1bf9a41aa89fbcaeb7d0f196b51d79ff30?cid=774b29d4f13844c495f206cafdad9c86",
+            "track": true,
+            "track_number": 6,
+            "type": "track",
+            "uri": "spotify:track:5L5N8YOsBxdzR9h9sudBgG"
+          },
+          "video_thumbnail": {
+            "url": null
+          }
+        },
+        {
+          "added_at": "2022-11-25T03:21:38Z",
+          "added_by": {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/maisey6288"
+            },
+            "href": "https://api.spotify.com/v1/users/maisey6288",
+            "id": "maisey6288",
+            "type": "user",
+            "uri": "spotify:user:maisey6288"
+          },
+          "is_local": false,
+          "primary_color": null,
+          "track": {
+            "album": {
+              "album_type": "compilation",
+              "external_urls": {
+                "spotify": "https://open.spotify.com/album/6EIxlDI9fMtooJ1H3toRFO"
+              },
+              "href": "https://api.spotify.com/v1/albums/6EIxlDI9fMtooJ1H3toRFO",
+              "id": "6EIxlDI9fMtooJ1H3toRFO",
+              "name": "Heathers: The Musical (World Premiere Cast Recording)",
+              "release_date": "2014-06-10",
+              "release_date_precision": "day",
+              "total_tracks": 20,
+              "type": "album",
+              "uri": "spotify:album:6EIxlDI9fMtooJ1H3toRFO"
+            },
+            "disc_number": 1,
+            "duration_ms": 191533,
+            "episode": false,
+            "explicit": false,
+            "external_ids": {
+              "isrc": "US6W61422232"
+            },
+            "external_urls": {
+              "spotify": "https://open.spotify.com/track/2p0FjrYZlNhEejQOLXHP2n"
+            },
+            "href": "https://api.spotify.com/v1/tracks/2p0FjrYZlNhEejQOLXHP2n",
+            "id": "2p0FjrYZlNhEejQOLXHP2n",
+            "is_local": false,
+            "name": "Seventeen",
+            "popularity": 58,
+            "preview_url": "https://p.scdn.co/mp3-preview/84305e8ab60a25be0ffc705e8988c4e3dd493159?cid=774b29d4f13844c495f206cafdad9c86",
+            "track": true,
+            "track_number": 11,
+            "type": "track",
+            "uri": "spotify:track:2p0FjrYZlNhEejQOLXHP2n"
+          },
+          "video_thumbnail": {
+            "url": null
+          }
+        },
+        {
+          "added_at": "2022-11-25T03:21:43Z",
+          "added_by": {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/maisey6288"
+            },
+            "href": "https://api.spotify.com/v1/users/maisey6288",
+            "id": "maisey6288",
+            "type": "user",
+            "uri": "spotify:user:maisey6288"
+          },
+          "is_local": false,
+          "primary_color": null,
+          "track": {
+            "album": {
+              "album_type": "compilation",
+              "external_urls": {
+                "spotify": "https://open.spotify.com/album/6m7n9JuAOMcy8X3ntO0Ktf"
+              },
+              "href": "https://api.spotify.com/v1/albums/6m7n9JuAOMcy8X3ntO0Ktf",
+              "id": "6m7n9JuAOMcy8X3ntO0Ktf",
+              "name": "Mean Girls (Original Broadway Cast Recording)",
+              "release_date": "2018-05-18",
+              "release_date_precision": "day",
+              "total_tracks": 21,
+              "type": "album",
+              "uri": "spotify:album:6m7n9JuAOMcy8X3ntO0Ktf"
+            },
+            "disc_number": 1,
+            "duration_ms": 203040,
+            "episode": false,
+            "explicit": false,
+            "external_ids": {
+              "isrc": "USAT21801372"
+            },
+            "external_urls": {
+              "spotify": "https://open.spotify.com/track/3iISGrl3JKqPQ4GLqPjVkt"
+            },
+            "href": "https://api.spotify.com/v1/tracks/3iISGrl3JKqPQ4GLqPjVkt",
+            "id": "3iISGrl3JKqPQ4GLqPjVkt",
+            "is_local": false,
+            "name": "World Burn",
+            "popularity": 56,
+            "preview_url": "https://p.scdn.co/mp3-preview/da8e2df88f1ceb94b6cef092639b2bbdb7dec40f?cid=774b29d4f13844c495f206cafdad9c86",
+            "track": true,
+            "track_number": 18,
+            "type": "track",
+            "uri": "spotify:track:3iISGrl3JKqPQ4GLqPjVkt"
+          },
+          "video_thumbnail": {
+            "url": null
+          }
+        }
+      ],
+      "limit": 100,
+      "next": null,
+      "offset": 0,
+      "previous": null,
+      "total": 9
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:5dqGJJeu380mboMbB0IyRF"
+  }
