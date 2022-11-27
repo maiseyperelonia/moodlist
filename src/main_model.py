@@ -13,6 +13,8 @@ import torchvision
 import torchvision.transforms as transforms
 import torch.nn.functional as F
 from sklearn.utils import shuffle
+import sklearn.metrics as skm
+from sklearn.metrics import classification_report
 
 
 # check device configuration
@@ -157,16 +159,22 @@ class fcn(nn.Module):
 
 def get_accuracy(model, train=False, val=False, batch_size=64):
     if train:
+        print('train')
         data = music_train
     elif val:
+        print('val')
         data = music_val
     else:
+        print('test')
         data = music_test
+        print(music_test)
 
     correct = 0
     total = 0
     for features, labels in torch.utils.data.DataLoader(data, batch_size=batch_size):
         output = model(features)
+        if (data == music_test):
+            print(output)
         # select index with maximum prediction score
         pred = output.max(1, keepdim=True)[1]
         correct += pred.eq(labels.view_as(pred)).sum().item()
@@ -244,7 +252,7 @@ if __name__ == "__main__":
     pathname = os.getcwd()
     train_data = Music_Data(pathname + '\input_data\\train') 
     val_data = Music_Data(pathname + '\input_data\\val')
-    test_data = Music_Data(pathname + '\input_data\\test')
+    test_data = Music_Data(pathname + '\input_data\\testing_data')
     title = ['danceability', 'energy', 'loudness', 'acousticness', 'valence', 'tempo', 'mood']
 
     moods = ['Angry', 'Calm', 'Happy', 'Love', 'Sad']
@@ -258,22 +266,18 @@ if __name__ == "__main__":
     input_size = 36
     hidden_size = 433
     num_classes = 5
-    num_epochs = 30
-    batch_size = 32
+    num_epochs = 60
+    batch_size = 128
     learning_rate = 0.01
     print("lr: ", learning_rate, "batch_size: ", batch_size, "num_epochs: ", num_epochs)
 
     model = fcn(input_size, hidden_size, num_classes)
     train(model, train_data, lr= learning_rate, num_epochs=num_epochs)
 
-    print("Testing accuracy: ", get_accuracy(model, train=False, val=False))
-    # maisey's data for testing
-        # world burn 3iISGrl3JKqPQ4GLqPjVkt
-        # seventeen 2p0FjrYZlNhEejQOLXHP2n
-        # dead girl walking 5L5N8YOsBxdzR9h9sudBgG
-        # i'd rather be me 2UNt0aiJNNXbbtSN5Aag0x
-        # take me or leave me 0E1NL6gkv5aQKGNjJfBE3A
-        # i'm here 30q6kWgifW3DwuVydQQX3g
-        # you shine 5JgILRnXH4nSah9m4EU46M
-        # flowers 48PFfbnf0ZRcGCxO4zApPp
-        # stupid with love 2fB3nWTsj1Aba2oJsAiTck
+    print("Testing Accuracy: ", get_accuracy(model, train=False, val=False))
+
+    # sad:
+    # 1. carnival town norah jones
+    # 2. yanghwa brdg zion t.
+    # 3. IF YOU BIGBANG
+    # 4. tired adele
