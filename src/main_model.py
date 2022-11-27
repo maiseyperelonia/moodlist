@@ -242,7 +242,9 @@ def train(model, data, batch_size=64, num_epochs=10 , print_stat = 1, lr= 0.001)
       print("Final Training Accuracy: {}".format(train_acc[-1]))
       print("Final Validation Accuracy: {}".format(val_acc[-1]))
 
-      print(model(music_test.__getitem__(0)[0]))
+      for songs in range(len(music_test)):
+        print("song: ", music_test.__getitem__(songs)[0])
+        print(model(music_test.__getitem__(songs)[0]))
 
 if __name__ == "__main__": 
     # call function to prepare data structure
@@ -263,7 +265,7 @@ if __name__ == "__main__":
     input_size = 36
     hidden_size = 433
     num_classes = 5
-    num_epochs = 30
+    num_epochs = 25
     batch_size = 128
     learning_rate = 0.01
     print("lr: ", learning_rate, "batch_size: ", batch_size, "num_epochs: ", num_epochs)

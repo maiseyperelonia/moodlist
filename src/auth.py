@@ -224,16 +224,47 @@ def split_data():
 if __name__ == "__main__":
     path = "../SpotifyDataset/data"
     auth = spotify_auth()
-
+    
     #get_playlists(path)
-    playlist = [["5wQnmLuC1W7ATsArWACrgW","1oTo3ijRbaDAtrjJrGAPSw","3tSmXSxaAnU1EPGKa6NytH",
+    playlist = [# Anrgy - Harshit
+                ["5wQnmLuC1W7ATsArWACrgW","1oTo3ijRbaDAtrjJrGAPSw","3tSmXSxaAnU1EPGKa6NytH",
                 "3ZffCQKLFLUvYM59XKLbVm","5hljqZrl0h7RcIhUnOPuve","6ihL9TjfRjadfEePzXXyVF",
-                "31q2AsxMNpxHNENkWKG1j0","5iCY0TXNImK4hyKfcplQsg","74kCarkFBzXYXNkkYJIsG0"
-                    ]]
+                "31q2AsxMNpxHNENkWKG1j0","5iCY0TXNImK4hyKfcplQsg","74kCarkFBzXYXNkkYJIsG0"],
+                # Love - Abeer
+                ["2eAvDnpXP5W0cVtiI0PUxV","0HYAsQwJIO6FLqpyTeD3l6","39EXZNMxb4RBHlRjnRaOKp",
+                 "5gBEdUKVZJgvQwNu8pIQqy","20gAOYKYQ7aFRVRg6LvrLW","6aHCXTCkPiB4zgXKpB7BHS",
+                 "1XyzcGhmO7iUamSS94XfqY","1XyzcGhmO7iUamSS94XfqY","3bnVBN67NBEzedqQuWrpP4"],
+                # Sad - Anne
+                ["5enxwA8aAbwZbf5qCHORXi", "4pNApnaUWAL2J4KO2eqokq", "4nyF5lmSziBAt7ESAUjpbx", 
+                "1wXqbn4OVaYBOhgj7Z4did", "2qLyo5FeWquE7HBUbcVnEy", "2I8YAEA1VmCuP1wkJHMpTw", 
+                "1BxfuPKGuaTgP7aM0Bbdwr", "3afkJSKX0EAMsJXTZnDXXJ", "3H7oAhHxkEkSf9iomv2mbG"],
+                # Love - Anne
+                ["1dGr1c8CrMLDpV6mPbImSI","4WHIqhrbdva5vQSrCuet3l","1fzAuUVbzlhZ1lJAx9PtY6",
+                "7F5oktn5YOsR9eR5YsFtqb","4A2LfnduSTsE8u0ecYROxE","14LtANuaslKWyYbktUrHBU",
+                "2IAR0DziHCjSu16gR4ihvy","22bPsP2jCgbLUvh82U0Z3M","4crdHmkZQmNd2hucSIk7dA"],
+                # Angry - Abeer
+                ["0H4ugk6rhnXmTl47ayy9O5","3xrn9i8zhNZsTtcoWgQEAd","1wcr8DjnN59Awev8nnKpQ4",
+                "31CdkzHnMbvJuKZvtCQfR6","5ghIJDpPoe3CfHMGu71E6T","5cbpoIu3YjoOwbBDGUEp3P",
+                "3QTDzwSkRW04FVPo6COm0H","7i9763l5SSfOnqZ35VOcfy","4RVwu0g32PAqgUiJoXsdF8"],
+                # Srini
+                ["3azJifCSqg9fRij2yKIbWz", "5dewQ7ojISR32NAYNHFYWC","34ZAzO78a5DAVNrYIGWcPm",
+                "7kfOEMJBJwdCYqyJeEnNhr","6ZRuF2n1CQxyxxAAWsKJOy","1p3RpKfSJQcVTEwrQWr8q7",
+                "2Ch7LmS7r2Gy2kc64wv3Bz","4NFD9ea0uH0MtoC30yNYE1","6ydWxkzjDktHsTzvWcaZ1i"],
+                # Happy- Maisey
+                ["0QHEIqNKsMoOY5urbzN48u", "1MkFj1ThZZxjYMNkczx9mk","4h9wh7iOZ0GGn8QVp4RAOB",
+                "1xzi1Jcr7mEi9K2RfzLOqS","185Q9qHtxrovV2fA09XjAw","0rIAC4PXANcKmitJfoqmVm",
+                "5B1TY0oq5I1VeTZxEnkGV8","1magKwGDsyU3RGjpo0BfPe","70khXICDeTTxgYtw3EysKH"],
+                # Laurel
+                ["5WbfFTuIldjL9x7W6y5l7R","3sNVsP50132BTNlImLx70i","1QxcWlk8PivolUaWcpAoNq",
+                 "1bDbXMyjaUIooNwFE9wn0N", "4wFeMmJDlgkAxlQ07PbdGZ","4EDijkJdHBZZ0GwJ12iTAj",
+                 "1nsFPTltzIVUJMWynPddpO", "1nsFPTltzIVUJMWynPddpO", "3XCveEutwTaDiekRkkfdp9"]
+                ]
     cnt = 0
     track_num = 0
     for playlist_id in range(len(playlist)):
         track_num+=1
+        cnt = 0
+        print(playlist_id)
         for track_id in playlist[playlist_id]:
             track_info = get_song_info(track_id).json()
 
@@ -241,7 +272,7 @@ if __name__ == "__main__":
                 create_csv("Angry", track_info, track_num)
                 cnt += 1
             #print("writing track num: ", total_song_cnt)
-            write_csv("Angry", track_info, 1)
+            write_csv("Angry", track_info, track_num)
     #visualize_data()
     #print_playlists(auth)
     #write_csv()
