@@ -11,7 +11,7 @@ import json
 import pandas as pd
 import matplotlib.pyplot as plt
 import plotly as px
-import splitfolders
+#import splitfolders
 import requests
 
 def get_spotify_token():
@@ -55,7 +55,6 @@ def print_playlists(sp):
             playlists = None
     # info = sp.user_playlist_create(sp.me().user_id, "I didn't make this", public=True, collaborative=False, description='')
     # print(info)
-
 
 def get_playlists(path):
     filenames = os.listdir(path)
@@ -202,7 +201,7 @@ def visualize_data():
     print(all_labels)
 
 def normalize_data():
-    directory = "input_data/test/"
+    directory = "../feature_data/"
 
     #for name in directory:
 
@@ -210,27 +209,42 @@ def normalize_data():
     for label_folder in os.listdir(directory):
         label_folder = label_folder + "/"
         for filename in os.listdir(directory+label_folder):
-            #if label_folder == "Love/":
-            df = pd.read_csv(directory+label_folder+filename)
-            df[['loudness','tempo']] = (df[['loudness','tempo']] - df[['loudness','tempo']].min())/(df[['loudness','tempo']].max() - df[['loudness','tempo']].min())
-    
-            df.loc['loudness'] = df['loudness']
-            df.loc['tempo'] = df['tempo']
-            df.to_csv(directory+label_folder+filename, index = False)
-
-
+            if label_folder == "Love/":
+                df = pd.read_csv(directory+label_folder+filename)
+                df[['loudness','tempo']] = (df[['loudness','tempo']] - df[['loudness','tempo']].min())/(df[['loudness','tempo']].max() - df[['loudness','tempo']].min())
+        
+                df.loc['loudness'] = df['loudness']
+                df.loc['tempo'] = df['tempo']
+                df.to_csv(directory+label_folder+filename, index = False)
 
 def split_data():
-    directory = "../feature_data_compressed/feature_data/"
-    splitfolders.ratio(directory, output='input_data', seed=1337, ratio=(0.6, 0.2,0.2)) 
+    directory = "../feature_data/"
+    #splitfolders.ratio(directory, output='input_data', seed=1337, ratio=(0.6, 0.2,0.2)) 
 
 if __name__ == "__main__":
     path = "../SpotifyDataset/data"
     auth = spotify_auth()
+
     #get_playlists(path)
+    playlist = [["5wQnmLuC1W7ATsArWACrgW","1oTo3ijRbaDAtrjJrGAPSw","3tSmXSxaAnU1EPGKa6NytH",
+                "3ZffCQKLFLUvYM59XKLbVm","5hljqZrl0h7RcIhUnOPuve","6ihL9TjfRjadfEePzXXyVF",
+                "31q2AsxMNpxHNENkWKG1j0","5iCY0TXNImK4hyKfcplQsg","74kCarkFBzXYXNkkYJIsG0"
+                    ]]
+    cnt = 0
+    track_num = 0
+    for playlist_id in range(len(playlist)):
+        track_num+=1
+        for track_id in playlist[playlist_id]:
+            track_info = get_song_info(track_id).json()
+
+            if(cnt == 0):
+                create_csv("Angry", track_info, track_num)
+                cnt += 1
+            #print("writing track num: ", total_song_cnt)
+            write_csv("Angry", track_info, 1)
     #visualize_data()
     #print_playlists(auth)
     #write_csv()
-    split_data()
+    #split_data()
     #normalize_data()
     #process_playlists(path)

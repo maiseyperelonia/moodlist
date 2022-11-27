@@ -159,13 +159,10 @@ class fcn(nn.Module):
 
 def get_accuracy(model, train=False, val=False, batch_size=64):
     if train:
-        print('train')
         data = music_train
     elif val:
-        print('val')
         data = music_val
     else:
-        print('test')
         data = music_test
         print(music_test)
 
@@ -173,8 +170,6 @@ def get_accuracy(model, train=False, val=False, batch_size=64):
     total = 0
     for features, labels in torch.utils.data.DataLoader(data, batch_size=batch_size):
         output = model(features)
-        if (data == music_test):
-            print(output)
         # select index with maximum prediction score
         pred = output.max(1, keepdim=True)[1]
         correct += pred.eq(labels.view_as(pred)).sum().item()
@@ -247,6 +242,8 @@ def train(model, data, batch_size=64, num_epochs=10 , print_stat = 1, lr= 0.001)
       print("Final Training Accuracy: {}".format(train_acc[-1]))
       print("Final Validation Accuracy: {}".format(val_acc[-1]))
 
+      print(model(music_test.__getitem__(0)[0]))
+
 if __name__ == "__main__": 
     # call function to prepare data structure
     pathname = os.getcwd()
@@ -266,7 +263,7 @@ if __name__ == "__main__":
     input_size = 36
     hidden_size = 433
     num_classes = 5
-    num_epochs = 60
+    num_epochs = 30
     batch_size = 128
     learning_rate = 0.01
     print("lr: ", learning_rate, "batch_size: ", batch_size, "num_epochs: ", num_epochs)
@@ -274,7 +271,9 @@ if __name__ == "__main__":
     model = fcn(input_size, hidden_size, num_classes)
     train(model, train_data, lr= learning_rate, num_epochs=num_epochs)
 
-    print("Testing Accuracy: ", get_accuracy(model, train=False, val=False))
+    #print("Testing Accuracy: ", get_accuracy(model, train=False, val=False))
+    #print("predictions: ", model(test_data))
+
 
     # sad:
     # 1. carnival town norah jones
